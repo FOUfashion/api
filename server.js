@@ -1,12 +1,16 @@
 import Hapi from 'hapi';
 import Good from 'good';
+import Lout from 'lout';
+
+import routes from './config/routes';
 
 let server = new Hapi.Server();
-
 server.connection({
   port: process.env.PORT || 3000,
-  host: process.env.HOST || '0.0.0.0'
+  host: process.env.HOSTNAME || 'localhost'
 });
+
+server.route(routes);
 
 server.register([{
   register: Good,
@@ -14,22 +18,16 @@ server.register([{
     reporters: [{
       reporter: 'good-console',
       events: {
-        ops: '*',
         log: '*',
         response: '*',
-        error: '*',
-        request: '*',
-        wreck: '*'
+        error: '*'
       }
     }]
   }
-}], function(err) {
-  'use strict';
+}], (err) => {
   if (err) {
-    console.error(err);
-  } else {
-    server.start(function() {
-      console.log('Server started at: ' + server.info.uri); // jshint ignore:line
-    });
+    throw err;
   }
+
+  server.start(() => server.log('info', `Server running at: ${server.info.uri}`));
 });

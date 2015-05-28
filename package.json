@@ -1,7 +1,7 @@
 {
-  "name": "Kaidu API",
+  "name": "api",
   "version": "0.1.0",
-  "description": "API",
+  "description": "Kaidu API",
   "main": "server.js",
   "dependencies": {
     "babel": "^5.4.7",
@@ -10,7 +10,11 @@
     "hapi": "^8.5.2"
   },
   "devDependencies": {
-    "lab": "^5.9.0"
+    "babel-eslint": "^3.1.9",
+    "eslint": "^0.21.2",
+    "joi": "^6.4.3",
+    "lab": "^5.9.0",
+    "lout": "^6.2.2"
   },
   "scripts": {
     "start": "babel-node server.js",

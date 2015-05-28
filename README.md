@@ -1,4 +1,1 @@
-Kaidu
-=====
-
-Built for you.
+# Kaidu API
