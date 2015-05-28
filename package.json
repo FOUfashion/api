@@ -1,0 +1,19 @@
+{
+  "name": "Kaidu",
+  "version": "0.1.0",
+  "description": "Built for you.",
+  "main": "server.js",
+  "scripts": {
+    "test": "lab -t 50"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:Aluxian/kaidu.git"
+  },
+  "keywords": [
+    "social",
+    "network"
+  ],
+  "author": "Alexandru Rosianu",
+  "license": "MIT"
+}
