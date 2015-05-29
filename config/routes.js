@@ -1,13 +1,19 @@
+import HomeCtrl from '../controllers/home';
+import UserCtrl from '../controllers/user';
+
+let home = new HomeCtrl();
+let user = new UserCtrl();
+
 export default [{
   method: 'GET',
   path: '/',
-  handler: (request, reply) => {
-    reply('Kaidu API!');
-  }
+  handler: home.index
 }, {
   method: 'GET',
-  path: '/{name}',
-  handler: (request, reply) => {
-    reply(`Hello, /${request.params.name}!`);
-  }
+  path: '/ping',
+  handler: home.ping
+}, {
+  method: 'GET',
+  path: '/user/{name}',
+  handler: user.index
 }];

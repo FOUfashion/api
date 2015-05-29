@@ -1,7 +1,6 @@
 import Hapi from 'hapi';
-import Good from 'good';
-import Lout from 'lout';
 
+import plugins from './config/plugins';
 import routes from './config/routes';
 
 let server = new Hapi.Server();
@@ -12,19 +11,7 @@ server.connection({
 
 server.route(routes);
 
-server.register([{
-  register: Good,
-  options: {
-    reporters: [{
-      reporter: 'good-console',
-      events: {
-        log: '*',
-        response: '*',
-        error: '*'
-      }
-    }]
-  }
-}], (err) => {
+server.register(plugins, (err) => {
   if (err) {
     throw err;
   }
