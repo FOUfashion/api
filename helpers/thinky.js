@@ -1,4 +1,4 @@
-import {rethinkdb as options} from '../config/dbs';
+import dbs from '../config/dbs';
 import thinky from 'thinky';
 
-export default thinky(options);
+export default thinky(dbs.rethinkdb);
