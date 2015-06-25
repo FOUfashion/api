@@ -14,7 +14,7 @@ class AccountCtrl {
   }
 
   async create(request, reply) {
-    let account = new Account({
+    const account = new Account({
       username: request.payload.username,
       password: await crypt.encryptPassword(request.payload.password),
       profile: new Profile({

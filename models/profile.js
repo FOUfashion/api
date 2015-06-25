@@ -1,7 +1,7 @@
-import thinky, {type} from '../helpers/thinky';
+import thinky, {type, r} from '../helpers/thinky';
 
 const Profile = thinky.createModel('Profile', {
-  id: type.string(),
+  id: type.string().default(r.uuid()),
   accountId: type.string(),
   email: type.string().required().email().max(64).lowercase(),
   name: type.object().schema({

@@ -1,4 +1,5 @@
 import thinky, {type, r} from '../helpers/thinky';
+import entities from '../helpers/entities';
 
 import Account from './account';
 import Client from './client';
@@ -8,7 +9,7 @@ const Token = thinky.createModel('Token', {
   accountId: type.string().required(),
   clientId: type.string().required(),
   scope: type.array().schema(type.number()).required(),
-  entity: type.string().enum('app', 'user').required(),
+  entity: type.string().enum(entities.FIRST_PARTY, entities.THIRD_PARTY).default(entities.FIRST_PARTY),
   createdAt: type.date().default(r.now())
 }, {
   pk: 'value'

@@ -1,6 +1,6 @@
-# Kaidu API
+# Fou API
 
-Live. Share. Talk.
+Be crazy.
 
 ## Reference
 

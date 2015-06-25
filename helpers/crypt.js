@@ -1,22 +1,27 @@
-import crypto from 'crypto';
-
-const keylen = 512;
-const digest = 'sha256';
+import acrypto from 'acrypto';
 
 export default {
-  encrypt: async function(val, iterations) {
-    let salt = await crypto.randomBytes(64);
+  encrypt: async function(val, saltlen, iterations, keylen, digest) {
+    let salt = await acrypto.randomBytes(saltlen);
     salt = salt.toString('hex');
 
-    let key = await crypto.pbkdf2(val, salt, iterations, keylen, digest);
-    key = key.toString('hex');
+    let key = await acrypto.pbkdf2(val, salt, iterations, keylen, digest);
+    key = key.toString('base64');
 
     return `${salt}:${key}:${iterations}`;
   },
-  encryptPassword: async function(password) {
-    return this.encrypt(password, 8192);
+  encryptPassword: function(password) {
+    return this.encrypt(password, 64, 8192, 256, 'sha256');
   },
-  encryptToken: async function(token) {
-    return this.encrypt(token, 2048);
+  encryptToken: function(token) {
+    return this.encrypt(token, 20, 8192, 32, 'sha1');
+  },
+  generateToken: async function() {
+    const token = await acrypto.randomBytes(16);
+    return token.toString('hex');
+  },
+  generateSecret: async function() {
+    const secret = await acrypto.randomBytes(24);
+    return secret.toString('hex');
   }
 };
