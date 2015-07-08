@@ -9,17 +9,17 @@
     "babel-runtime": "^5.6.15",
     "good": "^6.2.0",
     "good-console": "^5.0.2",
-    "hapi": "^8.6.1",
+    "hapi": "^8.8.0",
     "hapi-auth-bearer-token": "^3.1.1",
     "joi": "^6.5.0",
-    "thinky": "^2.0.7",
+    "thinky": "^2.0.8",
     "vantage": "^0.3.2"
   },
   "devDependencies": {
-    "babel-eslint": "^3.1.20",
+    "babel-eslint": "^3.1.23",
     "code": "^1.4.1",
     "eslint": "^0.24.0",
-    "lab": "^5.11.1",
+    "lab": "^5.13.0",
     "nodemon": "^1.3.7"
   },
   "scripts": {
