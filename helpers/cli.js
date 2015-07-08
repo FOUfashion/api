@@ -1,16 +1,17 @@
 import Vantage from 'vantage';
 
-import crypt from './helpers/crypt';
-import scopes from './helpers/scopes';
-import entities from './helpers/entities';
+import crypt from './crypt';
+import scopes from './scopes';
+import entities from './entities';
 
-import Account from './models/account';
-import Client from './models/client';
-import Token from './models/token';
+import Account from '../models/account';
+import Client from '../models/client';
+import Token from '../models/token';
 
-const server = new Vantage();
+const cli = new Vantage()
+cli.delimiter('api~$');
 
-server
+cli
   .command('account')
   .option('-u, --username <username>', 'Account username.')
   .description('Create a new Account.')
@@ -29,7 +30,7 @@ server
     }).save());
   });
 
-server
+cli
   .command('client')
   .option('-n, --name <name>', 'Client name.')
   .option('-a, --account <account>', 'The ID of the account that owns this client.')
@@ -42,7 +43,7 @@ server
     }).save());
   });
 
-server
+cli
   .command('token')
   .option('-a, --account <account>', 'The ID of the account that owns this client.')
   .option('-c, --client <client>', 'The ID of the client that owns this token.')
@@ -59,7 +60,7 @@ server
     }).save());
   });
 
-server
+cli
   .command('fp')
   .option('-u, --username <username>', 'Account username.')
   .option('-n, --name <name>', 'Client name.')
@@ -98,6 +99,4 @@ server
     console.log('Token:', token);
   });
 
-server
-  .delimiter('api~$')
-  .listen(process.env.CLI_PORT || 4000);
+export default cli;

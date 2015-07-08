@@ -1,5 +1,9 @@
 {
   "stage": 0,
   "sourceMaps": "inline",
-  "optional": ["runtime"]
+  "env": {
+    "production": {
+      "optional": ["runtime", "optimisation"]
+    }
+  }
 }

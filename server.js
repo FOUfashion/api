@@ -1,5 +1,7 @@
 import Hapi from 'hapi';
 
+import cli from './helpers/cli';
+import cliConfig from './config/cli';
 import thinky from './helpers/thinky';
 import strategies from './config/strategies';
 import serverConfig from './config/server';
@@ -29,5 +31,9 @@ server.register(plugins, error => {
   server.route(routes);
   server.start(() => server.log('info', `Server running at: ${server.info.uri}`));
 });
+
+if (cliConfig.enabled) {
+  cli.listen(cliConfig.port);
+}
 
 export default server;
