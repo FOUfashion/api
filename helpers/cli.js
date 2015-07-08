@@ -26,7 +26,6 @@ const banner =
 
 const cli = new Vantage()
 cli.delimiter('api~$');
-cli.use('vantage-system');
 cli.banner(banner);
 
 cli
