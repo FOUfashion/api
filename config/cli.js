@@ -1,4 +1,4 @@
 export default {
   enabled: process.env.CLI_ENABLED,
-  port: process.env.CLI_PORT || 4000
+  port: process.env.CLI_PORT
 };

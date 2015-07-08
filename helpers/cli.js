@@ -8,8 +8,26 @@ import Account from '../models/account';
 import Client from '../models/client';
 import Token from '../models/token';
 
+const banner =
+`################################################################################
+#                                                                              #
+#                         ########  #######  ##     ##                         #
+#                         ##       ##     ## ##     ##                         #
+#                         ######   ##     ## ##     ##                         #
+#                         ##       ##     ## ##     ##                         #
+#                         ##        #######   #######                          #
+#                                                                              #
+#                          Welcome to FOU.fashion API                          #
+#                                                                              #
+#                  All connections are monitored and recorded                  #
+#           Disconnect IMMEDIATELY if you are not an authorized user           #
+#                                                                              #
+################################################################################`;
+
 const cli = new Vantage()
 cli.delimiter('api~$');
+cli.use('vantage-system');
+cli.banner(banner);
 
 cli
   .command('account')
