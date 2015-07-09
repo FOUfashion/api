@@ -24,7 +24,7 @@ const banner =
 #                                                                              #
 ################################################################################`;
 
-const cli = new Vantage()
+const cli = new Vantage();
 cli.delimiter('api~$');
 cli.banner(banner);
 
@@ -37,7 +37,7 @@ cli
       this.prompt({
         type: 'password',
         name: 'password',
-        message: 'Enter a password for the account',
+        message: 'Enter a password for the account'
       }, resolve);
     });
 
@@ -87,7 +87,7 @@ cli
       this.prompt({
         type: 'password',
         name: 'password',
-        message: 'Enter a password for the account',
+        message: 'Enter a password for the account'
       }, result => resolve(result.password));
     });
 
@@ -100,7 +100,7 @@ cli
       name: args.options.name,
       secret: await crypt.generateSecret(),
       accountId: account.id
-    }).save()
+    }).save();
 
     const token = await crypt.generateToken();
     await new Token({

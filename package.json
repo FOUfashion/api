@@ -25,6 +25,7 @@
   "scripts": {
     "prod": "babel-node server.js",
     "dev": "nodemon --exec babel-node server.js",
+    "lint": "eslint .",
     "test": "lab -S -T ./lab-transformers.js -t 100 tests",
     "coverage": "lab -r html -o coverage.html"
   },
