@@ -1,4 +1,4 @@
-const manifest = require('../package.json');
+import manifest from '../../package.json';
 
 class HomeCtrl {
 

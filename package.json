@@ -24,16 +24,20 @@
     "nodemon": "^1.3.7"
   },
   "scripts": {
-    "prod": "npm run build && node build/server.js",
-    "dev": "npm run build && (babel --watch --ignore node_modules --out-dir build . &) && nodemon build/server.js",
-    "build": "rm -rf build && babel --ignore node_modules --out-dir build . && cp -f package.json build/",
-    "lint": "eslint .",
-    "test": "npm run build && lab -S -C -a code build/tests",
-    "coverage": "npm run build && lab -S -C -a code -r html -o coverage.html build/tests"
+    "build": "babel --out-dir build src",
+    "watch": "npm run build && (babel --watch --out-dir build src &)",
+    "start": "npm run build && node build/server.js",
+    "start-watch": "npm run watch && nodemon --watch build build/server.js",
+    "lint": "eslint src",
+    "lint-watch": "nodemon --watch src --exec 'eslint src'",
+    "test": "npm run build && lab -S -C -v -t 50 -a code build/tests",
+    "test-watch": "npm run watch && nodemon --watch build --exec 'lab -S -C -v -t 50 -a code build/tests'",
+    "coverage": "npm run build && lab -S -C -v -t 50 -a code -r html -o coverage.html build/tests",
+    "coverage-watch": "npm run watch && nodemon --watch build --exec 'lab -S -C -v -t 50 -a code -r html -o coverage.html build/tests'"
   },
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:fou-fashion/api.git"
+    "url": "git@github.com:FOUfashion/api.git"
   },
   "author": "Alexandru Rosianu <me@aluxian.com>",
   "license": "MIT"
