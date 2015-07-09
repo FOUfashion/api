@@ -25,7 +25,7 @@
   },
   "scripts": {
     "prod": "npm run build && node build/server.js",
-    "dev": "npm run build && babel --watch --ignore node_modules --out-dir build . && nodemon build/server.js",
+    "dev": "npm run build && (babel --watch --ignore node_modules --out-dir build . &) && nodemon build/server.js",
     "build": "rm -rf build && babel --ignore node_modules --out-dir build . && cp -f package.json build/",
     "lint": "eslint .",
     "test": "npm run build && lab -S -C -a code build/tests",
