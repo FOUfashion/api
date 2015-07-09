@@ -4,6 +4,9 @@
   "env": {
     "production": {
       "optional": ["runtime", "optimisation"]
+    },
+    "test": {
+      "optional": ["runtime", "optimisation"]
     }
   }
 }
