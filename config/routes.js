@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import entities from '../helpers/entities';
 
 import HomeCtrl from '../controllers/home';
 import AuthCtrl from '../controllers/auth';
@@ -28,7 +29,7 @@ export default [
     handler: auth.authorize,
     config: {
       auth: {
-        entity: 'app'
+        entity: entities.FIRST_PARTY
       },
       validate: {
         payload: {
@@ -41,11 +42,11 @@ export default [
     }
   }, {
     method: 'POST',
-    path: '/oauth/exchange',
-    handler: auth.exchange,
+    path: '/oauth/exchange/code',
+    handler: auth.exchangeCode,
     config: {
       auth: {
-        entity: 'app'
+        entity: entities.FIRST_PARTY
       },
       validate: {
         payload: {
@@ -57,11 +58,11 @@ export default [
     }
   }, {
     method: 'POST',
-    path: '/oauth/basic',
-    handler: auth.basic,
+    path: '/oauth/exchange/credentials',
+    handler: auth.exchangeCredentials,
     config: {
       auth: {
-        entity: 'app'
+        entity: entities.FIRST_PARTY
       },
       validate: {
         payload: Joi.object().keys({
@@ -90,13 +91,15 @@ export default [
     handler: account.create,
     config: {
       auth: {
-        entity: 'app'
+        entity: entities.FIRST_PARTY
       },
       validate: {
         payload: {
           email: Joi.string().required().email().max(64).lowercase().trim(),
           username: Joi.string().required().alphanum().min(4).max(12).trim(),
-          password: Joi.string().required().min(6).max(32).trim()
+          password: Joi.string().required().min(6).max(32).trim(),
+          firstName: Joi.string().min(1).max(32).trim(),
+          lastName: Joi.string().min(1).max(32).trim()
         }
       }
     }

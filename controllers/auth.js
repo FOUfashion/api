@@ -4,11 +4,11 @@ class AuthCtrl {
     reply('Kaidu API!');
   }
 
-  exchange(request, reply) {
+  exchangeCode(request, reply) {
     reply('Kaidu API!');
   }
 
-  basic(request, reply) {
+  exchangeCredentials(request, reply) {
     reply('Kaidu API!');
   }
 

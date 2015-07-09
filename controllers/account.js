@@ -10,15 +10,21 @@ class AccountCtrl {
   }
 
   async get(request, reply) {
-    reply(await Account.get(request.params.id).getJoin().run());
+    const account = await Account.get(request.params.id).getJoin().run();
+    reply(account);
   }
 
   async create(request, reply) {
+    const encryptedPassword = await crypt.encryptPassword(request.payload.password);
     const account = new Account({
       username: request.payload.username,
-      password: await crypt.encryptPassword(request.payload.password),
+      password: encryptedPassword,
       profile: new Profile({
-        email: request.payload.email
+        email: request.payload.email,
+        name: {
+          first: request.payload.firstName,
+          last: request.payload.lastName
+        }
       })
     });
 
