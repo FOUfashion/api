@@ -29,7 +29,10 @@ server.register(plugins, error => {
   });
 
   server.route(routes);
-  server.start(() => server.log('info', `Server running at: ${server.info.uri}`));
+
+  if (!module.parent) {
+    server.start(() => server.log('info', `Server running at: ${server.info.uri}`));
+  }
 });
 
 if (cliConfig.enabled) {
