@@ -7,7 +7,7 @@ class HomeCtrl {
       name: manifest.description,
       version: manifest.version,
       authenticated: request.auth.isAuthenticated,
-      time: request.info.received
+      received: request.info.received
     });
   }
 

@@ -1,11 +1,12 @@
 import Lab from 'lab';
 import server from '../../server';
 
+const expect = Lab.assertions.expect;
 export const lab = Lab.script();
 
-lab.experiment('[Ctrl] Home', function() {
+lab.experiment('HomeCtrl.index', function() {
 
-  lab.test('main endpoint should return basic info', function(done) {
+  lab.test('returns basic info', function(done) {
     const options = {
       method: 'GET',
       url: '/'
@@ -14,13 +15,13 @@ lab.experiment('[Ctrl] Home', function() {
     server.inject(options, function(response) {
       const result = response.result;
 
-      lab.expect(response.statusCode).to.equal(200);
-      lab.expect(result).to.be.an('object');
+      expect(response.statusCode).to.equal(200);
+      expect(result).to.be.an.instanceof(Object);
 
-      lab.expect(result).to.have.property('name');
-      lab.expect(result).to.have.property('version');
-      lab.expect(result).to.have.property('authenticated');
-      lab.expect(result).to.have.property('received');
+      expect(result.name).to.exist();
+      expect(result.version).to.exist();
+      expect(result.authenticated).to.exist();
+      expect(result.received).to.exist();
 
       done();
     });
