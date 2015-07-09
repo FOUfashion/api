@@ -1,6 +1,4 @@
 export default [{
-  register: require('hapi-auth-bearer-token')
-}, {
   register: require('good'),
   options: {
     reporters: [{
@@ -12,4 +10,6 @@ export default [{
       }
     }]
   }
+}, {
+  register: require('hapi-auth-bearer-token')
 }];
