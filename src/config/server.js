@@ -3,7 +3,7 @@ export default {
     minimal: true
   },
   connection: {
-    port: process.env.PORT || 3000,
-    host: process.env.HOSTNAME || 'localhost'
+    port: process.env.PORT,
+    host: process.env.HOSTNAME
   }
 };
