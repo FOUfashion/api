@@ -37,6 +37,7 @@ server.register(plugins, error => {
 
 if (cliConfig.enabled) {
   cli.listen(cliConfig.port);
+  server.log('info', `Vantage CLI started on port ${cliConfig.port}`);
 }
 
 export default server;
