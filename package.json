@@ -24,7 +24,7 @@
   },
   "scripts": {
     "build": "babel --out-dir build src",
-    "watch": "babel --watch --out-dir build src &",
+    "watch": "(babel --watch --out-dir build src &) && sleep 3",
     "start": "npm run build -- --ignore src/tests && node build/server.js",
     "start-watch": "npm run watch && nodemon --watch build build/server.js",
     "lint": "eslint src",
