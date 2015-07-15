@@ -32,7 +32,9 @@
     "test": "npm run build && lab -S -t 50 -a code build/tests",
     "test-watch": "npm run watch && nodemon --watch build --exec 'lab -S -t 50 -a code build/tests'",
     "coverage": "npm run build && lab -S -t 50 -a code -r html -o coverage.html build/tests",
-    "coverage-watch": "npm run watch && nodemon --watch build --exec 'lab -S -t 50 -a code -r html -o coverage.html build/tests'"
+    "coverage-watch": "npm run watch && nodemon --watch build --exec 'lab -S -t 50 -a code -r html -o coverage.html build/tests'",
+    "clean": "rm -rf build node_modules",
+    "clean-build": "rm -rf build"
   },
   "repository": {
     "type": "git",
