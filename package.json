@@ -26,14 +26,16 @@
     "nodemon": "^1.3.7"
   },
   "scripts": {
-    "start": "scripts/start.sh",
-    "start-watch": "scripts/start-watch.sh",
+    "build": "rm -rf build && babel --out-dir build src",
+    "watch": "rm -rf build && (babel --watch --out-dir build src &) && sleep 2",
+    "start": "npm run build -- --ignore src/tests && node build/server.js",
+    "start-watch": "npm run watch && nodemon --watch build build/server.js",
     "lint": "eslint src",
     "lint-watch": "nodemon --watch src --exec 'eslint src'",
-    "test": "scripts/test.sh",
-    "test-watch": "scripts/test-watch.sh",
-    "coverage": "scripts/coverage.sh",
-    "coverage-watch": "scripts/coverage-watch.sh",
+    "test": "npm run build && lab -S -l -v -a code build/tests",
+    "test-watch": "npm run watch && nodemon --watch build --exec 'lab -S -l -v -a code build/tests'",
+    "coverage": "npm run build && lab -S -l -v -a code -r html -o coverage.html build/tests",
+    "coverage-watch": "npm run watch && nodemon --watch build --exec 'lab -S -l -v -a code -r html -o coverage.html build/tests'",
     "clean": "rm -rf build node_modules",
     "clean-build": "rm -rf build"
   },
