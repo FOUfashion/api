@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e && source ./scripts/env-test.shn
+set -e && source ./scripts/env-test.sh
 
 rm -rf build
 babel --watch --out-dir build src &
