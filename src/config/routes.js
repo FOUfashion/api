@@ -109,16 +109,20 @@ export default routes.map(route => {
   const handler = route.handler;
   const docNameRegex = /.*r\.table\("(.+?)"\).*/gm;
 
-  if (handler.toString().includes('return spawn.promise();')) {
-    route.handler = function(request, reply) {
-      handler(request, reply)
-        .catch(thinky.Errors.DocumentNotFound, error => {
+  route.handler = function(request, reply) {
+    const result = handler(request, reply);
+
+    if (result && result.catch) {
+      result.catch(error => {
+        if (error instanceof thinky.Errors.DocumentNotFound) {
           const docName = docNameRegex.exec(error.message)[1];
           reply(Boom.notFound(`${docName} not found`));
-        })
-        .catch(reply);
-    };
-  }
+        } else {
+          reply(error);
+        }
+      });
+    }
+  };
 
   return route;
 });

@@ -1,4 +1,4 @@
-import {promisify} from './bluebird';
+import {promisify} from 'bluebird';
 import {r} from './thinky';
 
 async function clearDatabase() {
