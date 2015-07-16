@@ -9,18 +9,14 @@ data.sync = async function(done) {
     return;
   }
 
-  try {
-    await dbUtils.clearDatabase();
+  await dbUtils.clearDatabase();
 
-    this.fp = await generate.firstPartyCredentials('fpusername', 'fp_password', 'fp_name');
-    this.tp = await generate.thirdPartyCredentials('tpusername', 'tp_password', 'tp_name');
-    this.account = await generate.account('testuser', 'testpass');
+  this.fp = await generate.firstPartyCredentials('fpusername', 'fp_password', 'fp_name');
+  this.tp = await generate.thirdPartyCredentials('tpusername', 'tp_password', 'tp_name');
+  this.account = await generate.account('testuser', 'testpass');
 
-    synced = true;
-    done();
-  } catch(ex) {
-    done(ex);
-  }
+  synced = true;
+  done();
 };
 
 export default data;
