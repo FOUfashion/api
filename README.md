@@ -7,23 +7,17 @@ The API is built with [Hapi.js](http://hapijs.com/), a rich framework for buildi
 
 ## Build
 
+Install dependencies:
+
+```bash
+npm install
+```
+
 To build and start the API, run:
 
 ```bash
 npm start
-```
-
-To reload the server automatically when changing the source code, use the watch script:
-
-```bash
-npm run start-watch
-```
-
-And to clean the the build folder:
-
-```bash
-npm run clean # build and node_modules
-npm run clean-build # build
+npm run start-watch # reload the server automatically on changes
 ```
 
 ## Tests
@@ -42,7 +36,7 @@ npm run coverage
 npm run coverage-watch
 ```
 
-It has 100% code coverage.
+These scripts will create a `coverage.html` report. It has 100% code coverage.
 
 ## IDE and linting
 
@@ -54,3 +48,7 @@ If you'd like, you can also lint the entire codebase manually:
 npm run lint
 npm run lint-watch
 ```
+
+## Server CLI
+
+The API uses [Vantage](https://github.com/dthree/vantage) to create a CLI intended only for private use. It is used to create resources and generate auth credentials for first-party clients without exposing these abilities to everyone else.
