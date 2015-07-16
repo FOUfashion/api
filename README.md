@@ -7,48 +7,64 @@ The API is built with [Hapi.js](http://hapijs.com/), a rich framework for buildi
 
 ## Build
 
-Install dependencies:
-
 ```bash
+# install dependencies
 npm install
-```
 
-To build and start the API, run:
+# set required env vars
+source .env
 
-```bash
+# point `docker` to your docker IP (or change RETHINKDB_HOST)
+echo "$(boot2docker ip)	docker" >> /etc/hosts
+
+# build and start the server
 npm start
-npm run start-watch # reload the server automatically on changes
+
+# start and reload the server automatically on changes
+npm run start-watch
 ```
 
 ## Tests
 
-Fou API uses [Lab](https://github.com/hapijs/lab) to run tests and [Code](https://github.com/hapijs/code) for assertions. To run the tests:
+Fou API uses [Lab](https://github.com/hapijs/lab) to run tests and [Code](https://github.com/hapijs/code) for assertions.
 
 ```bash
+# set required env vars
+source .env
+NODE_ENV=test
+RETHINKDB_DB=test
+
+# run the tests
 npm test
+
+# automatically re-run the tests on code changes
 npm run test-watch
-```
 
-And to see the coverage:
-
-```bash
+# run the tests and generate a coverage.html report
 npm run coverage
+
+# automatically re-run the tests with coverage on code changes
 npm run coverage-watch
-```
 
-These scripts will create a `coverage.html` report. It has 100% code coverage.
-
-## IDE and linting
-
-I use Atom with `atom-beautify`, `autocomplete`, `language-babel`, `linter` and `linter-eslint`. These plugins provide code formatting, auto completion, ES6 support and linting.
-
-If you'd like, you can also lint the entire codebase manually:
-
-```bash
+# also lint the code if you're feeling fancy
 npm run lint
+
+# and if you can't help from typing...
 npm run lint-watch
 ```
 
 ## Server CLI
 
-The API uses [Vantage](https://github.com/dthree/vantage) to create a CLI intended only for private use. It is used to create resources and generate auth credentials for first-party clients without exposing these abilities to everyone else.
+The API uses [Vantage](https://github.com/dthree/vantage) to create a remote CLI intended only for private use. It is used to create resources and generate auth credentials for first-party clients without exposing these abilities to everyone else.
+
+```bash
+# install vantage
+npm intall -g vantage
+
+# connect to the CLI
+vantage 127.0.0.1:4000
+```
+
+## IDE and linting
+
+I use [Atom](https://atom.io/) with `atom-beautify`, `autocomplete`, `language-babel`, `linter` and `linter-eslint`. These plugins provide code formatting, auto completion, ES6 support and linting.
