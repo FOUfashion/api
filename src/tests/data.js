@@ -4,6 +4,10 @@ import dbUtils from '../helpers/dbUtils';
 const data = {};
 let synced = false;
 
+/**
+ * This module serves as a common pool of documents and credentials to be used in tests.
+ * Sync makes sure those resources are loaded before being used.
+ */
 data.sync = async function(done) {
   if (synced) {
     return;

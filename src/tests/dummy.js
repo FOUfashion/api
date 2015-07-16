@@ -1,5 +1,9 @@
 import faker from 'faker';
 
+/**
+ * Generates dummy objects using faker.
+ * Used in tests to create random db documents.
+ */
 export default {
 
   account: function() {
