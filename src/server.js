@@ -12,9 +12,11 @@ server.connection(serverConfig.connection);
 
 // Register plugins
 server.register(plugins, error => {
+  // $lab:coverage:off$
   if (error) {
     return server.log('error', error);
   }
+  // $lab:coverage:on$
 
   // Import strategies
   strategies.forEach(strategy => {
@@ -25,15 +27,19 @@ server.register(plugins, error => {
   server.route(routes);
 
   // Start the server unless require'd
+  // $lab:coverage:off$
   if (!module.parent) {
     server.start(() => server.log('info', `Server running at: ${server.info.uri}`));
   }
+  // $lab:coverage:on$
 });
 
 // Start the CLI
+// $lab:coverage:off$
 if (cliConfig.enabled) {
   cli.listen(cliConfig.port);
   server.log('info', `Vantage CLI started on port ${cliConfig.port}`);
 }
+// $lab:coverage:on$
 
 export default server;

@@ -10,7 +10,7 @@ export const lab = Lab.script();
 lab.experiment('AccountCtrl', function() {
 
   lab.before(done => {
-    data.sync(done);
+    data.sync().then(done, done);
   });
 
   lab.test('[getAuthenticated] returns the current account', function(done) {

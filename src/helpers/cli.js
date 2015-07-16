@@ -21,6 +21,7 @@ const cli = new Vantage();
 cli.delimiter('api~$');
 cli.banner(banner);
 
+// $lab:coverage:off$
 cli
   .command('account')
   .option('-u, --username <username>', 'Account username.')
@@ -87,3 +88,4 @@ cli
   });
 
 export default cli;
+// $lab:coverage:on$

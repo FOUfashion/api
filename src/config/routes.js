@@ -36,10 +36,8 @@ const routes = [
       },
       validate: {
         payload: {
-          state: Joi.string(),
           scope: Joi.string(),
-          clientId: Joi.string().required(),
-          clientSecret: Joi.string().required()
+          clientId: Joi.string().required()
         }
       }
     }
@@ -68,13 +66,10 @@ const routes = [
         entity: entities.FIRST_PARTY
       },
       validate: {
-        payload: Joi.object().keys({
-          email: Joi.string(),
-          username: Joi.string(),
-          password: Joi.string().required(),
-          clientId: Joi.string().required(),
-          clientSecret: Joi.string().required()
-        }).xor('email', 'username')
+        payload: {
+          username: Joi.string().required(),
+          password: Joi.string().required()
+        }
       }
     }
   },
@@ -112,11 +107,15 @@ const routes = [
 // Catch errors for async handlers
 export default routes.map(route => {
   const handler = route.handler;
+  const docNameRegex = /.*r\.table\("(.+?)"\).*/gm;
 
   if (handler.toString().includes('return spawn.promise();')) {
     route.handler = function(request, reply) {
       handler(request, reply)
-        .catch(thinky.Errors.DocumentNotFound, () => reply(Boom.notFound()))
+        .catch(thinky.Errors.DocumentNotFound, error => {
+          const docName = docNameRegex.exec(error.message)[1];
+          reply(Boom.notFound(`${docName} not found`));
+        })
         .catch(reply);
     };
   }
