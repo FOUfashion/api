@@ -2,7 +2,6 @@ import Hapi from 'hapi';
 
 import cli from './helpers/cli';
 import cliConfig from './config/cli';
-import thinky from './helpers/thinky';
 import strategies from './config/strategies';
 import serverConfig from './config/server';
 import plugins from './config/plugins';
@@ -10,14 +9,6 @@ import routes from './config/routes';
 
 const server = new Hapi.Server(serverConfig.options);
 server.connection(serverConfig.connection);
-
-server.ext('onPreResponse', (request, reply) => {
-  if (request.response.source instanceof thinky.Errors.DocumentNotFound) {
-    request.response.code(404);
-  }
-
-  reply.continue();
-});
 
 server.register(plugins, error => {
   if (error) {

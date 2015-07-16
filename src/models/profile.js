@@ -8,7 +8,7 @@ const Profile = thinky.createModel('Profile', {
     first: type.string(),
     last: type.string(),
     full: type.virtual().default(function() {
-      return this.first + ' ' + this.last;
+      return this.name.first + ' ' + this.name.last;
     })
   })
 }, {

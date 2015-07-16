@@ -1,4 +1,4 @@
 export default {
-  FIRST_PARTY: 'app',
-  THIRD_PARTY: 'user'
+  FIRST_PARTY: 'user',
+  THIRD_PARTY: 'app'
 };

@@ -10,6 +10,12 @@ class AccountCtrl {
   }
 
   async get(request, reply) {
+    const accounts = await Account.filter({ id: request.params.id }).getJoin().run();
+
+    if (accounts.length > 0) {
+      return reply(accounts[0]);
+    }
+
     const account = await Account.get(request.params.id).getJoin().run();
     reply(account);
   }

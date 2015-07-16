@@ -10,6 +10,7 @@ const Client = thinky.createModel('Client', {
   createdAt: type.date().default(r.now())
 });
 
+Client.ensureIndex('id');
 Client.belongsTo(Account, 'account', 'accountId', 'id');
 
 export default Client;

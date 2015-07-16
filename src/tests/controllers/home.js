@@ -6,29 +6,25 @@ export const lab = Lab.script();
 
 lab.experiment('HomeCtrl', function() {
 
-  lab.experiment('index', function() {
+  lab.test('[index] returns basic info', function(done) {
+    const options = {
+      method: 'GET',
+      url: '/'
+    };
 
-    lab.test('returns basic info', function(done) {
-      const options = {
-        method: 'GET',
-        url: '/'
-      };
+    server.inject(options, function(response) {
+      const result = response.result;
 
-      server.inject(options, function(response) {
-        const result = response.result;
+      expect(response.statusCode).to.equal(200);
+      expect(result).to.be.an.instanceof(Object);
 
-        expect(response.statusCode).to.equal(200);
-        expect(result).to.be.an.instanceof(Object);
+      expect(result.name).to.exist();
+      expect(result.version).to.exist();
+      expect(result.authenticated).to.exist();
+      expect(result.received).to.exist();
 
-        expect(result.name).to.exist();
-        expect(result.version).to.exist();
-        expect(result.authenticated).to.exist();
-        expect(result.received).to.exist();
-
-        done();
-      });
+      done();
     });
-
   });
 
 });

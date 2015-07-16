@@ -1,0 +1,13 @@
+#!/bin/bash
+
+NODE_ENV=test
+PORT=3000
+HOSTNAME=localhost
+RETHINKDB_HOST=docker
+RETHINKDB_PORT=28015
+RETHINKDB_DB=test
+CLI_ENABLED=true
+CLI_PORT=4000
+
+LAB_CONFIG="-S -l -v -a code"
+LAB_CONFIG_COV="$LAB_CONFIG -r html -o coverage.html"

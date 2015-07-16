@@ -1,20 +1,20 @@
 import acrypto from 'acrypto';
 
 export default {
-  encrypt: async function(val, saltlen, iterations, keylen, digest) {
-    let salt = await acrypto.randomBytes(saltlen);
-    salt = salt.toString('hex');
+  encryptPassword: async function(password, salt, iterations) {
+    if (!salt) {
+      salt = await acrypto.randomBytes(64);
+      salt = salt.toString('hex');
+    }
 
-    let key = await acrypto.pbkdf2(val, salt, iterations, keylen, digest);
+    if (!iterations) {
+      iterations = 8192;
+    }
+
+    let key = await acrypto.pbkdf2(password, salt, iterations, 256, 'sha256');
     key = key.toString('base64');
 
     return `${salt}:${key}:${iterations}`;
-  },
-  encryptPassword: function(password) {
-    return this.encrypt(password, 64, 8192, 256, 'sha256');
-  },
-  encryptToken: function(token) {
-    return this.encrypt(token, 20, 8192, 32, 'sha1');
   },
   generateToken: async function() {
     const token = await acrypto.randomBytes(16);

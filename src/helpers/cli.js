@@ -1,12 +1,5 @@
 import Vantage from 'vantage';
-
-import crypt from './crypt';
-import scopes from './scopes';
-import entities from './entities';
-
-import Account from '../models/account';
-import Client from '../models/client';
-import Token from '../models/token';
+import generate from './generate';
 
 const banner =
 `################################################################################
@@ -41,10 +34,8 @@ cli
       }, resolve);
     });
 
-    console.log('Doc:', await new Account({
-      username: args.options.username,
-      password: await crypt.encryptPassword(password)
-    }).save());
+    const account = await generate.account(args.options.username, password);
+    console.log(account);
   });
 
 cli
@@ -53,28 +44,25 @@ cli
   .option('-a, --account <account>', 'The ID of the account that owns this client.')
   .description('Create a new Client.')
   .action(async function(args) {
-    console.log('Doc:', await new Client({
-      name: args.options.name,
-      secret: await crypt.generateSecret(),
-      accountId: args.options.account
-    }).save());
+    const client = await generate.client(args.options.name, args.options.account);
+    console.log(client);
   });
 
 cli
   .command('token')
   .option('-a, --account <account>', 'The ID of the account that owns this client.')
   .option('-c, --client <client>', 'The ID of the client that owns this token.')
+  .option('-s, --scope <scope>', 'The scopes for this token, separated by commas.')
+  .option('-e, --entity <entity>', 'The entity type for this token. Can be `app`, `user` or `any`.')
   .description('Create a new Token.')
   .action(async function(args) {
-    const token = await crypt.generateToken();
-    console.log('Token:', token);
-    console.log('Doc:', await new Token({
-      value: await crypt.encryptToken(token),
-      accountId: args.options.account,
-      clientId: args.options.client,
-      scope: scopes.all,
-      entity: entities.FIRST_PARTY
-    }).save());
+    const accountId = args.options.account;
+    const clientId = args.options.client;
+    const scope = args.options.scope.replace(/\s/g, '').split(',');
+    const entity = args.options.entity;
+
+    const token = await this.token(accountId, clientId, scope, entity);
+    console.log(token);
   });
 
 cli
@@ -91,29 +79,11 @@ cli
       }, result => resolve(result.password));
     });
 
-    const account = await new Account({
-      username: args.options.username,
-      password: await crypt.encryptPassword(password)
-    }).save();
+    const fp = await generate.firstPartyCredentials(args.options.username, password, args.options.name);
 
-    const client = await new Client({
-      name: args.options.name,
-      secret: await crypt.generateSecret(),
-      accountId: account.id
-    }).save();
-
-    const token = await crypt.generateToken();
-    await new Token({
-      value: await crypt.encryptToken(token),
-      accountId: account.id,
-      clientId: client.id,
-      scope: scopes.all,
-      entity: entities.FIRST_PARTY
-    }).save();
-
-    console.log('Client ID:', client.id);
-    console.log('Client Secret:', client.secret);
-    console.log('Token:', token);
+    console.log('Client ID:', fp.client.id);
+    console.log('Client Secret:', fp.client.secret);
+    console.log('Token:', fp.token.value);
   });
 
 export default cli;

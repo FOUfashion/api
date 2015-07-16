@@ -11,6 +11,7 @@ const Account = thinky.createModel('Account', {
   pk: 'username'
 });
 
+Account.ensureIndex('id');
 Account.hasOne(Profile, 'profile', 'id', 'accountId');
 
 export default Account;

@@ -3,10 +3,13 @@
   "sourceMaps": "inline",
   "env": {
     "production": {
-      "optional": ["runtime", "optimisation"]
+      "optional": ["bluebirdCoroutines", "runtime", "optimisation"]
+    },
+    "development": {
+      "optional": ["bluebirdCoroutines"]
     },
     "test": {
-      "optional": ["runtime", "optimisation"]
+      "optional": ["bluebirdCoroutines", "runtime", "optimisation"]
     }
   }
 }

@@ -1,4 +1,7 @@
+import Boom from 'boom';
 import Joi from 'joi';
+
+import thinky from '../helpers/thinky';
 import entities from '../helpers/entities';
 
 import HomeCtrl from '../controllers/home';
@@ -9,7 +12,7 @@ const home = new HomeCtrl();
 const auth = new AuthCtrl();
 const account = new AccountCtrl();
 
-export default [
+const routes = [
   // Home
   {
     method: 'GET',
@@ -105,3 +108,18 @@ export default [
     }
   }
 ];
+
+// Catch errors for async handlers
+export default routes.map(route => {
+  const handler = route.handler;
+
+  if (handler.toString().includes('return spawn.promise();')) {
+    route.handler = function(request, reply) {
+      handler(request, reply)
+        .catch(thinky.Errors.DocumentNotFound, () => reply(Boom.notFound()))
+        .catch(reply);
+    };
+  }
+
+  return route;
+});
