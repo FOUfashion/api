@@ -11,12 +11,6 @@ The API is built with [Hapi.js](http://hapijs.com/), a rich framework for buildi
 # install dependencies
 npm install
 
-# set required env vars
-source .env
-
-# point `docker` to your docker IP (or change RETHINKDB_HOST)
-echo "$(boot2docker ip)	docker" >> /etc/hosts
-
 # build and start the server
 npm start
 
@@ -24,16 +18,13 @@ npm start
 npm run start-watch
 ```
 
+Note that you need a RethinkDB server running on localhost. Take a look in the `config` folder too.
+
 ## Tests
 
 Fou API uses [Lab](https://github.com/hapijs/lab) to run tests and [Code](https://github.com/hapijs/code) for assertions.
 
 ```bash
-# set required env vars
-source .env
-NODE_ENV=test
-RETHINKDB_DB=test
-
 # run the tests
 npm test
 
@@ -60,6 +51,12 @@ The API uses [Vantage](https://github.com/dthree/vantage) to create a remote CLI
 ```bash
 # install vantage
 npm intall -g vantage
+
+# enable the CLI
+export CLI_ENABLED=true
+
+# start the server
+npm start
 
 # connect to the CLI
 vantage 127.0.0.1:4000

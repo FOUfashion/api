@@ -1,5 +1,5 @@
 export const rethinkdb = {
-  host: process.env.RETHINKDB_HOST,
-  port: process.env.RETHINKDB_PORT,
-  db: process.env.RETHINKDB_DB
+  host: process.env.RETHINKDB_HOST || 'localhost',
+  port: process.env.RETHINKDB_PORT || 28015,
+  db: process.env.RETHINKDB_DB || 'test'
 };

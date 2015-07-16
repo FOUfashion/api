@@ -1,15 +1,5 @@
 {
   "stage": 0,
   "sourceMaps": "inline",
-  "env": {
-    "production": {
-      "optional": ["bluebirdCoroutines", "runtime", "optimisation"]
-    },
-    "development": {
-      "optional": ["bluebirdCoroutines"]
-    },
-    "test": {
-      "optional": ["bluebirdCoroutines", "runtime", "optimisation"]
-    }
-  }
+  "optional": ["bluebirdCoroutines", "runtime", "optimisation"]
 }
