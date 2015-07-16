@@ -9,13 +9,13 @@ The API is built with [Hapi.js](http://hapijs.com/), a rich framework for buildi
 
 ```bash
 # install dependencies
-npm install
+$ npm install
 
 # build and start the server
-npm start
+$ npm start
 
 # start and reload the server automatically on changes
-npm run start-watch
+$ npm run start-watch
 ```
 
 Note that you need a RethinkDB server running on localhost. Take a look in the `config` folder too.
@@ -26,22 +26,22 @@ Fou API uses [Lab](https://github.com/hapijs/lab) to run tests and [Code](https:
 
 ```bash
 # run the tests
-npm test
+$ npm test
 
 # automatically re-run the tests on code changes
-npm run test-watch
+$ npm run test-watch
 
 # run the tests and generate a coverage.html report
-npm run coverage
+$ npm run coverage
 
 # automatically re-run the tests with coverage on code changes
-npm run coverage-watch
+$ npm run coverage-watch
 
 # also lint the code if you're feeling fancy
-npm run lint
+$ npm run lint
 
 # and if you can't help from typing...
-npm run lint-watch
+$ npm run lint-watch
 ```
 
 ## Server CLI
@@ -50,16 +50,16 @@ The API uses [Vantage](https://github.com/dthree/vantage) to create a remote CLI
 
 ```bash
 # install vantage
-npm intall -g vantage
+$ npm intall -g vantage
 
 # enable the CLI
-export CLI_ENABLED=true
+$ export CLI_ENABLED=true
 
 # start the server
-npm start
+$ npm start
 
 # connect to the CLI
-vantage 127.0.0.1:4000
+$ vantage 127.0.0.1:4000
 ```
 
 ## IDE and linting
