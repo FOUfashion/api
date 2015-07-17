@@ -8,6 +8,10 @@ export const lab = Lab.script();
 
 lab.experiment('HomeCtrl', function() {
 
+  lab.before(done => {
+    data.sync().then(done, done);
+  });
+
   lab.test('[index] returns basic info', function(done) {
     const options = {
       method: 'GET',
