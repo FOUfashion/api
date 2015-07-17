@@ -6,6 +6,13 @@
 
 The API is built with [Hapi.js](http://hapijs.com/), a rich framework for building applications and services.
 
+## Pre-Requisites
+
+You need the following:
+
+- `node.js` with generators support or `io.js`
+- a RethinkDB server running on localhost
+
 ## Build
 
 ```bash
@@ -18,8 +25,6 @@ $ npm start
 # start and reload the server automatically on changes
 $ npm run start-watch
 ```
-
-> Note that you need `node.js` with generators support or `io.js` and a RethinkDB server running on localhost. Take a look in the `config` folder too.
 
 ## Tests
 
