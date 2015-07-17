@@ -1,7 +1,3 @@
-machine:
-  node:
-    version: 0.12.0
-
 dependencies:
   cache_directories:
     - ~/rethinkdb
@@ -16,6 +12,7 @@ dependencies:
         apt-get download rethinkdb
       fi
     - sudo dpkg -i ~/rethinkdb/*.deb
+    - nvm install iojs
   post:
     - rethinkdb:
         background: true

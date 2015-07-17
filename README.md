@@ -19,7 +19,7 @@ $ npm start
 $ npm run start-watch
 ```
 
-Note that you need a RethinkDB server running on localhost. Take a look in the `config` folder too.
+> Note that you need `node.js` with generators support or `io.js` and a RethinkDB server running on localhost. Take a look in the `config` folder too.
 
 ## Tests
 
