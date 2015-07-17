@@ -1,16 +1,21 @@
 dependencies:
+  cache_directories:
+    - ~/rethinkdb
   pre:
-    - source /etc/lsb-release && echo "deb http://download.rethinkdb.com/apt $DISTRIB_CODENAME main" | sudo tee /etc/apt/sources.list.d/rethinkdb.list
-    - wget -qO- http://download.rethinkdb.com/apt/pubkey.gpg | sudo apt-key add -
-    - sudo apt-get update
-    - sudo apt-get install rethinkdb
+    - |
+      if [ ! -f ~/rethinkdb/*.deb ] ; then
+        source /etc/lsb-release && echo "deb http://download.rethinkdb.com/apt $DISTRIB_CODENAME main" | sudo tee /etc/apt/sources.list.d/rethinkdb.list
+        wget -qO- http://download.rethinkdb.com/apt/pubkey.gpg | sudo apt-key add -
+        sudo apt-get update
+        mkdir ~/rethinkdb
+        cd ~/rethinkdb
+        apt-get download rethinkdb
+      fi
+    - sudo dpkg -i ~/rethinkdb/*.deb
+  post:
     - rethinkdb:
         background: true
-  post:
-    - npm install -g codeclimate-test-reporter
 
 test:
   override:
-    - npm run coverage-lcov
-  post:
-    - codeclimate-test-reporter < lcov.info
+    - npm run coveralls
