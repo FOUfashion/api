@@ -13,6 +13,7 @@ dependencies:
       fi
     - sudo dpkg -i ~/rethinkdb/*.deb
     - nvm install iojs
+    - nvm use iojs
   post:
     - rethinkdb:
         background: true
