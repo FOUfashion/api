@@ -18,6 +18,6 @@ dependencies:
 
 test:
   override:
-    - npm run coverage
+    - npm run test
   post:
     - cp coverage.html $CIRCLE_ARTIFACTS
