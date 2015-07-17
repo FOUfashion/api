@@ -6,7 +6,11 @@ dependencies:
     - sudo apt-get install rethinkdb
     - rethinkdb:
         background: true
+  post:
+    - npm install -g codeclimate-test-reporter
 
 test:
   override:
-    - npm run coveralls
+    - npm run coverage-lcov
+  post:
+    - codeclimate-test-reporter < lcov.info

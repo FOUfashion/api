@@ -20,7 +20,6 @@
   "devDependencies": {
     "babel-eslint": "^3.1.23",
     "code": "^1.4.1",
-    "coveralls": "^2.11.2",
     "eslint": "^1.0.0-rc-1",
     "faker": "^3.0.0",
     "lab": "^5.13.0",
@@ -37,7 +36,7 @@
     "test-watch": "npm run watch && nodemon --watch build --exec 'lab -S -l -v -a code build/tests'",
     "coverage": "npm run build && lab -S -l -v -a code -r html -o coverage.html build/tests",
     "coverage-watch": "npm run watch && nodemon --watch build --exec 'lab -S -l -v -a code -r html -o coverage.html build/tests'",
-    "coveralls": "npm run build && lab -S -l -v -a code -r lcov build/tests | coveralls",
+    "coverage-lcov": "npm run build && lab -S -l -v -a code -r lcov -o lcov.info build/tests",
     "clean": "rm -rf build node_modules",
     "clean-build": "rm -rf build"
   },
