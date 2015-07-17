@@ -1,8 +1,8 @@
 # Fou API
 
-[![Circle CI](https://circleci.com/gh/FOUfashion/api.svg?style=svg)](https://circleci.com/gh/FOUfashion/api)
-[![Coverage Status](https://coveralls.io/repos/FOUfashion/api/badge.svg?branch=master&service=github)](https://coveralls.io/github/FOUfashion/api?branch=master)
 [![Dependencies Status](https://david-dm.org/FOUfashion/api.png)](https://david-dm.org/FOUfashion/api)
+[![Coverage Status](https://coveralls.io/repos/FOUfashion/api/badge.svg?branch=master&service=github)](https://coveralls.io/github/FOUfashion/api?branch=master)
+[![Circle CI](https://circleci.com/gh/FOUfashion/api.svg?style=svg)](https://circleci.com/gh/FOUfashion/api)
 
 The API is built with [Hapi.js](http://hapijs.com/), a rich framework for building applications and services.
 
