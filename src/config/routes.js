@@ -114,12 +114,14 @@ export default routes.map(route => {
 
     if (result && result.catch) {
       result.catch(error => {
+        // $lab:coverage:off$
         if (error instanceof thinky.Errors.DocumentNotFound) {
           const docName = docNameRegex.exec(error.message)[1];
           reply(Boom.notFound(`${docName} not found`));
         } else {
           reply(error);
         }
+        // $lab:coverage:on$
       });
     }
   };
