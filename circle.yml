@@ -24,6 +24,6 @@ test:
   pre:
     - sleep 10
   override:
-    - npm run test
+    - npm run coverage
   post:
     - cp coverage.html $CIRCLE_ARTIFACTS
