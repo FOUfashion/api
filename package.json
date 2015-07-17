@@ -37,7 +37,7 @@
     "test-watch": "npm run watch && nodemon --watch build --exec 'lab -S -l -v -a code build/tests'",
     "coverage": "npm run build && lab -S -l -v -a code -r html -o coverage.html build/tests",
     "coverage-watch": "npm run watch && nodemon --watch build --exec 'lab -S -l -v -a code -r html -o coverage.html build/tests'",
-    "coveralls": "npm run build && lab -S -l -v -a code -r lcov build/tests > coveralls",
+    "coveralls": "npm run build && lab -S -l -v -a code -r lcov build/tests | coveralls",
     "clean": "rm -rf build node_modules",
     "clean-build": "rm -rf build"
   },
