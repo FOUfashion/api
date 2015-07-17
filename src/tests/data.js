@@ -13,7 +13,6 @@ data.sync = async function() {
     return;
   }
 
-  dbUtils.waitAllTables();
   await dbUtils.clearDatabase();
 
   this.fp = await generate.firstPartyCredentials('fpusername', 'fp_password', 'fp_name');

@@ -17,6 +17,8 @@ dependencies:
         background: true
 
 test:
+  pre:
+    - sleep 3
   override:
     - npm run test
   post:

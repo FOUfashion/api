@@ -1,10 +1,6 @@
 import {promisify} from 'bluebird';
 import {r} from './thinky';
 
-function waitAllTables() {
-  r.wait();
-}
-
 async function clearDatabase() {
   const tableList = r.tableList();
   const tables = await promisify(tableList.run, tableList)();
@@ -16,6 +12,5 @@ async function clearDatabase() {
 }
 
 export default {
-  waitAllTables,
   clearDatabase
 };
