@@ -1,0 +1,14 @@
+// $lab:coverage:off$
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var rethinkdb = {
+  host: process.env.RETHINKDB_HOST || 'localhost',
+  port: process.env.RETHINKDB_PORT || 28015,
+  db: process.env.RETHINKDB_DB || 'test'
+};
+// $lab:coverage:on$
+exports.rethinkdb = rethinkdb;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9jb25maWcvZGJzLmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUNPLElBQU0sU0FBUyxHQUFHO0FBQ3ZCLE1BQUksRUFBRSxPQUFPLENBQUMsR0FBRyxDQUFDLGNBQWMsSUFBSSxXQUFXO0FBQy9DLE1BQUksRUFBRSxPQUFPLENBQUMsR0FBRyxDQUFDLGNBQWMsSUFBSSxLQUFLO0FBQ3pDLElBQUUsRUFBRSxPQUFPLENBQUMsR0FBRyxDQUFDLFlBQVksSUFBSSxNQUFNO0NBQ3ZDLENBQUM7O1FBSlcsU0FBUyxHQUFULFNBQVMiLCJmaWxlIjoiZGJzLmpzIiwic291cmNlc0NvbnRlbnQiOlsiLy8gJGxhYjpjb3ZlcmFnZTpvZmYkXG5leHBvcnQgY29uc3QgcmV0aGlua2RiID0ge1xuICBob3N0OiBwcm9jZXNzLmVudi5SRVRISU5LREJfSE9TVCB8fCAnbG9jYWxob3N0JyxcbiAgcG9ydDogcHJvY2Vzcy5lbnYuUkVUSElOS0RCX1BPUlQgfHwgMjgwMTUsXG4gIGRiOiBwcm9jZXNzLmVudi5SRVRISU5LREJfREIgfHwgJ3Rlc3QnXG59O1xuLy8gJGxhYjpjb3ZlcmFnZTpvbiRcbiJdfQ==
