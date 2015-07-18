@@ -11,6 +11,13 @@ You need the following:
 - `node.js` with generators support or `io.js`
 - a RethinkDB server running on localhost
 
+If you're using the `FOUfashion/development` repo set-up, run these commands to start the database and the reverse proxy:
+
+```bash
+$ docker-compose up -d rethinkdb
+$ docker-compose up -d nginx
+```
+
 ## Build
 
 ```bash
