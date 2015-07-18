@@ -22,6 +22,6 @@ dependencies:
 
 test:
   pre:
-    - sleep 10
+    - sleep 20
   override:
     - npm run coveralls
