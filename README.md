@@ -16,6 +16,7 @@ If you're using the `FOUfashion/development` repo set-up, run these commands to 
 ```bash
 $ docker-compose up -d rethinkdb
 $ docker-compose up -d nginx
+$ source ../.env
 ```
 
 ## Build
