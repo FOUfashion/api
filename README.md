@@ -24,7 +24,7 @@ $ docker-compose up -d nginx
 # install dependencies
 $ npm install
 
-# build and start the server
+# start the server
 $ npm start
 
 # start and reload the server automatically on changes

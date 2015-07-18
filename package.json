@@ -29,7 +29,7 @@
   "scripts": {
     "build": "rm -rf build && babel --out-dir build src",
     "watch": "rm -rf build && (babel --watch --out-dir build src &) && sleep 2",
-    "start": "npm run build -- --ignore src/tests && node build/server.js",
+    "start": "node build/server.js",
     "start-watch": "npm run watch && nodemon --watch build build/server.js",
     "lint": "eslint src",
     "lint-watch": "nodemon --watch src --exec 'eslint src'",
