@@ -76,4 +76,4 @@ $ vantage 127.0.0.1:4000
 
 ## IDE and linting
 
-I use [Atom](https://atom.io/) with `atom-beautify`, `autocomplete`, `language-babel`, `linter` and `linter-eslint`. These plugins provide code formatting, auto completion, ES6 support and linting.
+I use [Atom](https://atom.io/) with `atom-beautify`, `autocomplete`, `language-babel`, `linter` and `linter-eslint`. These plugins provide code formatting, auto completion, ES6+ support and linting.
