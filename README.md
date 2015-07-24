@@ -1,4 +1,4 @@
-# Fou API
+![Fou API](header.png)
 
 [![Circle CI](https://img.shields.io/circleci/project/FOUfashion/api/master.svg)](https://circleci.com/gh/FOUfashion/api) [![Coverage](https://img.shields.io/coveralls/FOUfashion/api/master.svg)](https://coveralls.io/github/FOUfashion/api?branch=master) [![Dependencies](https://img.shields.io/david/FOUfashion/api.svg)](https://david-dm.org/FOUfashion/api)
 
