@@ -2,9 +2,16 @@
 
 [![Circle CI](https://img.shields.io/circleci/project/FOUfashion/api/master.svg)](https://circleci.com/gh/FOUfashion/api) [![Coverage](https://img.shields.io/coveralls/FOUfashion/api/master.svg)](https://coveralls.io/github/FOUfashion/api?branch=master) [![Dependencies](https://img.shields.io/david/FOUfashion/api.svg)](https://david-dm.org/FOUfashion/api)
 
-The API is built with [Hapi.js](http://hapijs.com/), a rich framework for building applications and services.
+The API was built with a focus on performance, intuitiveness and ease of use with the clients in mind. It uses:
 
-## Pre-Requisites
+- [Hapi.js](http://hapijs.com/) to power the server
+- [RethinkDB](http://rethinkdb.com/) for the main database store
+
+## Features :boom:
+
+- REST architecture fully decoupled from the clients
+
+## Pre-Requisites :computer:
 
 You need the following:
 
@@ -19,7 +26,7 @@ $ docker-compose up -d nginx
 $ source ../.env
 ```
 
-## Build
+## Build :pray:
 
 ```bash
 # install dependencies
@@ -32,7 +39,7 @@ $ npm start
 $ npm run start-watch
 ```
 
-## Tests
+## Tests :ok_hand:
 
 Fou API uses [Lab](https://github.com/hapijs/lab) to run tests and [Code](https://github.com/hapijs/code) for assertions.
 
@@ -56,7 +63,7 @@ $ npm run lint
 $ npm run lint-watch
 ```
 
-## Server CLI
+## Server CLI :pager:
 
 The API uses [Vantage](https://github.com/dthree/vantage) to create a remote CLI intended only for private use. It is used to create resources and generate auth credentials for first-party clients without exposing these abilities to everyone else.
 
@@ -74,6 +81,6 @@ $ npm start
 $ vantage 127.0.0.1:4000
 ```
 
-## IDE and linting
+## IDE and linting :star:
 
 I use [Atom](https://atom.io/) with `atom-beautify`, `autocomplete`, `language-babel`, `linter` and `linter-eslint`. These plugins provide code formatting, auto completion, ES6+ support and linting.
