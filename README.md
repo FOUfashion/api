@@ -9,7 +9,10 @@ The API was built with a focus on performance, intuitiveness and ease of use wit
 
 ## Features :boom:
 
-- REST architecture fully decoupled from the clients
+- RESTful architecture fully decoupled from the clients
+- implements OAuth 2 flow with the following grant types:
+  - *Authorization Code* for third party clients
+  - *Authorization Code* or *Resource Owner Password Credentials* for first party clients
 
 ## Pre-Requisites :computer:
 
