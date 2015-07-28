@@ -4,7 +4,7 @@ export default {
     minimal: true
   },
   connection: {
-    port: process.env.API_PORT || 3000,
+    port: process.env.API_PORT || 5000,
     host: process.env.API_HOSTNAME || '127.0.0.1'
   }
 };
