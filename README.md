@@ -35,8 +35,8 @@ $ source ../.env
 # install dependencies
 $ npm install
 
-# start the server
-$ npm start
+# build and start the server
+$ npm run build && npm start
 
 # start and reload the server automatically on changes
 $ npm run start-watch

@@ -7,10 +7,12 @@ import entities from '../helpers/entities';
 import HomeCtrl from '../controllers/home';
 import AuthCtrl from '../controllers/auth';
 import AccountCtrl from '../controllers/account';
+import ProfileCtrl from '../controllers/profile';
 
 const home = new HomeCtrl();
 const auth = new AuthCtrl();
 const account = new AccountCtrl();
+const profile = new ProfileCtrl();
 
 const routes = [
   // Home
@@ -98,6 +100,20 @@ const routes = [
           password: Joi.string().required().min(6).max(32).trim(),
           firstName: Joi.string().min(1).max(32).trim(),
           lastName: Joi.string().min(1).max(32).trim()
+        }
+      }
+    }
+  },
+
+  // Profile
+  {
+    method: 'GET',
+    path: '/profile',
+    handler: profile.get,
+    config: {
+      validate: {
+        query: {
+          email: Joi.string().required().email().max(64).lowercase().trim()
         }
       }
     }

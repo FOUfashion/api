@@ -4,6 +4,7 @@ import scopes from './scopes';
 import entities from './entities';
 
 import Account from '../models/account';
+import Profile from '../models/profile';
 import Client from '../models/client';
 import Token from '../models/token';
 
@@ -14,6 +15,10 @@ export default {
       username: username,
       password: await crypt.encryptPassword(password)
     }).save();
+  },
+
+  profile: async function(accountId, email, name) {
+    return await new Profile({ accountId, email, name }).save();
   },
 
   client: async function(name, accountId) {
