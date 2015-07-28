@@ -27,6 +27,7 @@ lab.experiment('AccountCtrl', function() {
 
       expect(response.statusCode).to.equal(200);
       expect(result.username).to.equal(data.fp.account.username);
+      expect(result.password).to.be.undefined();
 
       done();
     });
@@ -112,6 +113,7 @@ lab.experiment('AccountCtrl', function() {
 
       expect(response.statusCode).to.equal(201);
       expect(result.username).to.equal(options.payload.username);
+      expect(result.password).to.be.undefined();
       expect(result.id).to.exist();
 
       done();

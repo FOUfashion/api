@@ -17,12 +17,14 @@ class AccountCtrl {
     }
 
     const account = await Account.get(request.params.id).getJoin().run();
+    delete account.password;
+
     reply(account);
   }
 
   async create(request, reply) {
     const encryptedPassword = await crypt.encryptPassword(request.payload.password);
-    const account = new Account({
+    const account = await new Account({
       username: request.payload.username,
       password: encryptedPassword,
       profile: new Profile({
@@ -32,9 +34,10 @@ class AccountCtrl {
           last: request.payload.lastName
         }
       })
-    });
+    }).saveAll();
 
-    reply(await account.saveAll()).code(201);
+    delete account.password;
+    reply(account).code(201);
   }
 
 }

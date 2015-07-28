@@ -6,6 +6,7 @@ export default {
   bearer: async function(accessToken, callback) {
     try {
       const token = await Token.get(accessToken).getJoin().run();
+      delete token.account.password;
 
       callback(null, true, {
         user: token.entity === entities.FIRST_PARTY,
