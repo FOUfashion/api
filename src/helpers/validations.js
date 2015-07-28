@@ -1,4 +1,5 @@
 import Token from '../models/token';
+import thinky from '../helpers/thinky';
 import entities from './entities';
 
 export default {
@@ -13,8 +14,14 @@ export default {
         scope: token.scope,
         entity: token.entity
       });
-    } catch (ex) {
-      callback(ex);
+    } catch (error) {
+      // $lab:coverage:off$
+      if (error instanceof thinky.Errors.DocumentNotFound) {
+        callback(null, false);
+      } else {
+        callback(error);
+      }
+      // $lab:coverage:on$
     }
   }
 };
