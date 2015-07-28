@@ -132,7 +132,8 @@ export default routes.map(route => {
       result.catch(error => {
         // $lab:coverage:off$
         if (error instanceof thinky.Errors.DocumentNotFound) {
-          const docName = docNameRegex.exec(error.message)[1];
+          const matches = docNameRegex.exec(error.message);
+          const docName = matches && matches[1] || 'Document';
           reply(Boom.notFound(`${docName} not found`));
         } else {
           reply(error);
