@@ -60,7 +60,7 @@ class AuthCtrl {
 
     const token = await new Token({
       value: await crypt.generateToken(),
-      accountId: request.auth.credentials.account.id,
+      accountId: account.id,
       clientId: request.auth.credentials.client.id,
       scope: scopes.all
     }).save();
