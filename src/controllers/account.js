@@ -5,8 +5,10 @@ import Profile from '../models/profile';
 
 class AccountCtrl {
 
-  getAuthenticated(request, reply) {
-    reply(request.auth.credentials.account);
+  async getAuthenticated(request, reply) {
+    const account = await Account.get(request.auth.credentials.account.username).getJoin().run();
+    delete account.password;
+    reply(account);
   }
 
   async get(request, reply) {
