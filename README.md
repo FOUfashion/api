@@ -23,6 +23,7 @@ The API was built with a focus on performance, intuitiveness and ease of use wit
 
 - implement a socket-based messaging system
 - expose RethinkDB post feeds (through sockets)
+- use SSL for Vantage connections
 
 ## Pre-Requisites :computer:
 
