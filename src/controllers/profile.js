@@ -3,7 +3,7 @@ import Profile from '../models/profile';
 class ProfileCtrl {
 
   async getAuthenticated(request, reply) {
-    reply(await Profile.find(request.auth.credentials.profile.email));
+    reply(await Profile.find(request.auth.credentials.account.profile.email));
   }
 
   async get(request, reply) {

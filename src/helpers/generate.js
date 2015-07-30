@@ -39,7 +39,7 @@ export default {
   firstPartyCredentials: async function(username, password, name) {
     const account = await this.account(username, password);
     const client = await this.client(name, account.id);
-    const token = await this.token(account.id, client.id, scopes.FIRST_PARTY);
+    const token = await this.token(account.id, client.id, [scopes.FIRST_PARTY]);
 
     return {
       account,
@@ -51,7 +51,7 @@ export default {
   thirdPartyCredentials: async function(username, password, name) {
     const account = await this.account(username, password);
     const client = await this.client(name, account.id);
-    const token = await this.token(account.id, client.id, scopes.THIRD_PARTY);
+    const token = await this.token(account.id, client.id, [scopes.THIRD_PARTY]);
 
     return {
       account,
