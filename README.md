@@ -20,6 +20,10 @@ The API was built with a focus on performance, intuitiveness and ease of use wit
   - a 256-bit key is derived with `sha256` using a 256-bit salt and 8192 iterations => encryption is both fast and secure
   - passwords NEVER leave the API server
 
+## To-Do :dizzy:
+
+- handle DELETE requests properly: some joined documents to not get deleted
+
 ## Pre-Requisites :computer:
 
 You need the following:
@@ -74,7 +78,7 @@ $ npm run lint-watch
 
 ## Endpoints :golf:
 
-The API blueprint is available at [docs.fou.apiary.io](http://docs.fou.apiary.io/).
+The API blueprint is available at [docs.fou.apiary.io](http://docs.fou.apiary.io/). Other docs like the database diagram are included there.
 
 ## Server CLI :pager:
 
