@@ -3,6 +3,7 @@ import Profile from '../models/profile';
 class ProfileCtrl {
 
   async getAuthenticated(request, reply) {
+    console.log('profil getauth', request.auth.credentials.account);
     reply(await Profile.find(request.auth.credentials.account.profile.email));
   }
 

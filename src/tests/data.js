@@ -15,14 +15,31 @@ data.sync = async function() {
 
   await dbUtils.clearDatabase();
 
-  this.fp = await generate.firstPartyCredentials('fpusername', 'fp_password', 'fp_name');
-  this.tp = await generate.thirdPartyCredentials('tpusername', 'tp_password', 'tp_name');
+  this.fp = await generate.firstPartyCredentials({
+    username: 'fpusername',
+    password: 'fp_password',
+    clientName: 'fp_client_name',
+    profile: {
+      email: 'test@fp.com',
+      name: {
+        first: 'Premier',
+        last: 'Party'
+      }
+    }
+  });
 
-  this.account = await generate.account('testuser', 'testpass');
-  this.account.unencryptedPassword = 'testpass';
-
-  this.profile = await generate.profile(this.account.id, 'test@account.com', { first: 'Johnny', last: 'Bravo' });
-  this.client = await generate.client('testclient', this.account.id);
+  this.tp = await generate.thirdPartyCredentials({
+    username: 'tpusername',
+    password: 'tp_password',
+    clientName: 'tp_client_name',
+    profile: {
+      email: 'test@tp.com',
+      name: {
+        first: 'Zweite',
+        last: 'Party'
+      }
+    }
+  });
 
   synced = true;
 };

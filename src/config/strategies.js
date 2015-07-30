@@ -13,6 +13,11 @@ const strategies = [{
         const token = await Token.get(accessToken).getJoin().run();
         delete token.account.password;
 
+        console.log('credentials', {
+          client: token.client,
+          scope: token.scope
+        });
+
         callback(null, true, {
           account: token.account,
           client: token.client,
