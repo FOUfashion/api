@@ -21,7 +21,7 @@ lab.experiment('AuthCtrl', function() {
       method: 'POST',
       url: '/login',
       headers: {
-        'Authorization': `Bearer ${data.tp.token.value}`
+        'Authorization': `Bearer ${data.fp.token.value}`
       },
       payload: {
         username: data.account.username,
@@ -44,7 +44,7 @@ lab.experiment('AuthCtrl', function() {
       method: 'POST',
       url: '/login',
       headers: {
-        'Authorization': `Bearer ${data.tp.token.value}`
+        'Authorization': `Bearer ${data.fp.token.value}`
       },
       payload: {
         username: data.account.username,

@@ -33,6 +33,9 @@ const routes = [
     path: '/login',
     handler: auth.logIn,
     config: {
+      auth: {
+        entity: entities.FIRST_PARTY
+      },
       validate: {
         payload: {
           username: Joi.string().required(),
