@@ -21,9 +21,10 @@ The API was built with a focus on performance, intuitiveness and ease of use wit
 
 ## To-Do :dizzy:
 
-- implement a socket-based messaging system
+- implement a socket-based messaging system with [hapi-io](https://github.com/sibartlett/hapi-io)
 - expose RethinkDB post feeds (through sockets)
 - use SSL for Vantage connections
+- service emails
 
 ## Pre-Requisites :computer:
 
