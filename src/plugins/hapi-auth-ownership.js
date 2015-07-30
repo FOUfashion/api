@@ -21,7 +21,7 @@ function register(plugin, options, next) {
         }
 
         const rule = settings.rules[rule];
-        Hoek.assert(rule, `Rule '${ruleName}' not found for ownership-access strategy.`);
+        Hoek.assert(rule, `Rule '${ruleName}' not found for ownership-access strategy. Check the options.rules object.`);
 
         rule(request, credentials, function(error, isValid, newCredentials) {
           if (error) {
@@ -49,7 +49,7 @@ function register(plugin, options, next) {
 }
 
 register.attributes = {
-  name: 'auth-ownership'
+  name: 'hapi-auth-ownership'
 };
 
 export default register;

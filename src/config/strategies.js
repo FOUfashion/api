@@ -58,5 +58,4 @@ const strategies = [{
   }
 }];
 
-strategies.defaults = ['bearer', 'ownership'];
 export default strategies;

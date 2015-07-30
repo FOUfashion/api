@@ -26,7 +26,7 @@ server.register(plugins, error => {
 
   // Set the default strategies
   server.auth.default({
-    strategies: strategies.defaults
+    strategies: ['bearer', 'ownership']
   });
 
   // Add the routes

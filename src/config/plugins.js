@@ -13,5 +13,5 @@ export default [{
 }, {
   register: require('hapi-auth-bearer-token')
 }, {
-  register: require('../plugins/auth-ownership')
+  register: require('../plugins/hapi-auth-ownership')
 }];
