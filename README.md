@@ -66,6 +66,10 @@ $ npm run lint
 $ npm run lint-watch
 ```
 
+## Endpoints :golf:
+
+The API blueprint is available at [docs.fou.apiary.io](http://docs.fou.apiary.io/).
+
 ## Server CLI :pager:
 
 The API uses [Vantage](https://github.com/dthree/vantage) to create a remote CLI intended only for private use. It is used to create resources and generate auth credentials for first-party clients without exposing these abilities to everyone else.
