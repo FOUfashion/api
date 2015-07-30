@@ -5,11 +5,11 @@ import Hoek from 'hoek';
 
 function register(plugin, options, next) {
   plugin.auth.scheme('ownership-access', function(server, options) {
-    Hoek.assert(options, 'Missing options for ownership-access strategy.');
-    Hoek.assert(options.rules, 'Missing options.rules for ownership-access stategy.');
+    Hoek.assert(options, 'Missing options for ownership-access strategy');
+    Hoek.assert(options.rules, 'Missing options.rules for ownership-access stategy');
 
     const settings = Hoek.clone(options);
-    const invalidMessage = settings.invalidMessage || 'You do not have access to this resource.';
+    const invalidMessage = settings.invalidMessage || 'You do not have access to this resource';
 
     const scheme = {
       authenticate: function(request, reply) {
@@ -21,7 +21,7 @@ function register(plugin, options, next) {
         }
 
         const rule = settings.rules[rule];
-        Hoek.assert(rule, `Rule '${ruleName}' not found for ownership-access strategy. Check the options.rules object.`);
+        Hoek.assert(rule, `Rule '${ruleName}' not found for ownership-access strategy; check the options.rules object`);
 
         rule(request, credentials, function(error, isValid, newCredentials) {
           if (error) {
