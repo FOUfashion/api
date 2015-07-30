@@ -10,7 +10,9 @@ The API was built with a focus on performance, intuitiveness and ease of use wit
 ## Features :boom:
 
 - RESTful architecture fully decoupled from the clients
-- implements OAuth 2 flow with the following grant types:
+- 2 types of clients: first_party and third_party
+- CRUD routes with scope-based ACL
+- OAuth 2 flow with the following grant types:
   - *Authorization Code* for third party clients
   - *Authorization Code* or *Resource Owner Password Credentials* for first party clients
 
