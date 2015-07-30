@@ -8,12 +8,12 @@ function register(plugin, options, next) {
 
     const settings = Hoek.clone(options);
     const invalidMessage = settings.invalidMessage || 'You do not have access to this resource.';
-    const credentials = request.auth.credentials || {};
 
     const scheme = {
       authenticate: function(request, reply) {
         const auth = request.route.settings.auth;
         const ruleName = auth && auth.ownershipRule;
+        const credentials = request.auth.credentials || {};
 
         if (!ruleName) {
           return next();
