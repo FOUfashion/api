@@ -15,6 +15,10 @@ The API was built with a focus on performance, intuitiveness and ease of use wit
 - OAuth 2 flow with the following grant types:
   - *Authorization Code* for third party clients
   - *Authorization Code* or *Resource Owner Password Credentials* for first party clients
+- passwords
+  - encrypted with the [PBKDF2](https://en.wikipedia.org/wiki/PBKDF2) function
+  - a 256-bit key is derived with `sha256` using a 256-bit salt and 8192 iterations => encryption is both fast and secure
+  - passwords NEVER leave the API server
 
 ## Pre-Requisites :computer:
 
