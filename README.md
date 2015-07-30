@@ -90,7 +90,9 @@ The API uses [Vantage](https://github.com/dthree/vantage) to create a remote CLI
 $ npm intall -g vantage
 
 # enable the CLI
-$ export CLI_ENABLED=true
+$ export API_CLI_ENABLED=true
+$ export API_CLI_USER=admin
+$ export API_CLI_PASS=admin
 
 # start the server
 $ npm start
@@ -98,6 +100,8 @@ $ npm start
 # connect to the CLI
 $ vantage 127.0.0.1:4000
 ```
+
+You'll need to authenticate with the specified credentials.
 
 ## IDE and linting :star:
 
