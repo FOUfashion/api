@@ -33,6 +33,7 @@ const strategies = [{
   name: 'ownership',
   scheme: 'ownership-access',
   options: {
+    companionStrategy: 'bearer',
     rules: {
       account: async function(request, credentials, callback) {
         const matchesUsername = request.params.id === credentials.account.username;

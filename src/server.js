@@ -24,15 +24,13 @@ server.register(plugins, error => {
     server.auth.strategy(strategy.name, strategy.scheme, strategy.options);
   });
 
-  // Set the default strategies
-  server.auth.default({
-    strategies: ['bearer', 'ownership']
-  });
+  // Set the default strategy
+  server.auth.default('ownership');
 
   // Add the routes
   server.route(routes);
 
-  // Start the server unless require'd
+  // Start the server unless imported
   // $lab:coverage:off$
   if (!module.parent) {
     server.start(() => server.log('info', `Server running at: ${server.info.uri}`));

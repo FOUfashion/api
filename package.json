@@ -13,10 +13,10 @@
     "good-console": "^5.0.2",
     "hapi": "^8.8.1",
     "hapi-auth-bearer-token": "^3.1.1",
+    "hapi-auth-ownership": "^1.0.1",
     "hoek": "^2.14.0",
     "joi": "^6.6.1",
     "keymirror": "^0.1.1",
-    "selectn": "^0.9.6",
     "thinky": "^2.0.10",
     "vantage": "^1.0.1"
   },
