@@ -128,8 +128,12 @@ const routes = [
     handler: account.update,
     config: {
       auth: {
-        scope: [scopes.FIRST_PARTY],
-        ownershipRule: 'account'
+        scope: [scopes.FIRST_PARTY]
+      },
+      plugins: {
+        'hapi-auth-ownership': {
+          ownershipRule: 'account'
+        }
       },
       validate: {
         payload: {
@@ -143,8 +147,12 @@ const routes = [
     handler: account.delete,
     config: {
       auth: {
-        scope: [scopes.FIRST_PARTY],
-        ownershipRule: 'account'
+        scope: [scopes.FIRST_PARTY]
+      },
+      plugins: {
+        'hapi-auth-ownership': {
+          ownershipRule: 'account'
+        }
       }
     }
   },
@@ -163,8 +171,10 @@ const routes = [
     path: '/profile/{id}',
     handler: profile.update,
     config: {
-      auth: {
-        ownershipRule: 'profile'
+      plugins: {
+        'hapi-auth-ownership': {
+          ownershipRule: 'profile'
+        }
       },
       validate: {
         payload: {
@@ -185,8 +195,10 @@ const routes = [
     path: '/comment',
     handler: comment.create,
     config: {
-      auth: {
-        ownershipRule: 'post'
+      plugins: {
+        'hapi-auth-ownership': {
+          ownershipRule: 'post'
+        }
       },
       validate: {
         payload: {
@@ -200,8 +212,10 @@ const routes = [
     path: '/comment/{id}',
     handler: comment.update,
     config: {
-      auth: {
-        ownershipRule: 'comment'
+      plugins: {
+        'hapi-auth-ownership': {
+          ownershipRule: 'comment'
+        }
       },
       validate: {
         payload: {
@@ -214,8 +228,10 @@ const routes = [
     path: '/comment/{id}',
     handler: comment.delete,
     config: {
-      auth: {
-        ownershipRule: 'comment'
+      plugins: {
+        'hapi-auth-ownership': {
+          ownershipRule: 'comment'
+        }
       }
     }
   },
@@ -241,8 +257,10 @@ const routes = [
     path: '/post/{id}',
     handler: post.update,
     config: {
-      auth: {
-        ownershipRule: 'post'
+      plugins: {
+        'hapi-auth-ownership': {
+          ownershipRule: 'post'
+        }
       },
       validate: {
         payload: {
@@ -255,8 +273,10 @@ const routes = [
     path: '/post/{id}',
     handler: post.delete,
     config: {
-      auth: {
-        ownershipRule: 'post'
+      plugins: {
+        'hapi-auth-ownership': {
+          ownershipRule: 'post'
+        }
       }
     }
   }

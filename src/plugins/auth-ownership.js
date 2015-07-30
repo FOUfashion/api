@@ -1,3 +1,5 @@
+import selectn from 'selectn';
+
 import Boom from 'boom';
 import Hoek from 'hoek';
 
@@ -11,8 +13,7 @@ function register(plugin, options, next) {
 
     const scheme = {
       authenticate: function(request, reply) {
-        const auth = request.route.settings.auth;
-        const ruleName = auth && auth.ownershipRule;
+        const ruleName = selectn('plugins.hapi-auth-ownership.ownershipRule', request.route.settings);
         const credentials = request.auth.credentials || {};
 
         if (!ruleName) {

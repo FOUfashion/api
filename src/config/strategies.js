@@ -28,7 +28,7 @@ const strategies = [{
         // $lab:coverage:on$
       }
     }
-  },
+  }
 }, {
   name: 'ownership',
   scheme: 'ownership-access',
@@ -55,7 +55,7 @@ const strategies = [{
         callback(null, post.accountId === credentials.profile.id);
       }
     }
-  },
+  }
 }];
 
 strategies.defaults = ['bearer', 'ownership'];

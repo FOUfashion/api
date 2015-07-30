@@ -21,11 +21,11 @@ server.register(plugins, error => {
 
   // Import auth strategies
   strategies.forEach(strategy => {
-    server.auth.strategy(strategy.name, strategy.scheme, strategy.mode, strategy.options);
+    server.auth.strategy(strategy.name, strategy.scheme, strategy.options);
   });
 
   // Set the default strategies
-  server.auth.strategy.default({
+  server.auth.default({
     strategies: strategies.defaults
   });
 
