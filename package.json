@@ -13,7 +13,9 @@
     "good-console": "^5.0.2",
     "hapi": "^8.8.0",
     "hapi-auth-bearer-token": "^3.1.1",
+    "hoek": "^2.14.0",
     "joi": "^6.5.0",
+    "keymirror": "^0.1.1",
     "thinky": "^2.0.10",
     "vantage": "^0.3.2"
   },

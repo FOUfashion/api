@@ -2,17 +2,21 @@ import Boom from 'boom';
 import Joi from 'joi';
 
 import thinky from '../helpers/thinky';
-import entities from '../helpers/entities';
+import scopes from '../helpers/scopes';
 
 import HomeCtrl from '../controllers/home';
 import AuthCtrl from '../controllers/auth';
 import AccountCtrl from '../controllers/account';
 import ProfileCtrl from '../controllers/profile';
+import CommentCtrl from '../controllers/comment';
+import PostCtrl from '../controllers/post';
 
 const home = new HomeCtrl();
 const auth = new AuthCtrl();
 const account = new AccountCtrl();
 const profile = new ProfileCtrl();
+const comment = new CommentCtrl();
+const post = new PostCtrl();
 
 const routes = [
   // Home
@@ -34,7 +38,7 @@ const routes = [
     handler: auth.logIn,
     config: {
       auth: {
-        entity: entities.FIRST_PARTY
+        scope: [scopes.FIRST_PARTY]
       },
       validate: {
         payload: {
@@ -49,7 +53,7 @@ const routes = [
     handler: auth.authorize,
     config: {
       auth: {
-        entity: entities.FIRST_PARTY
+        scope: [scopes.FIRST_PARTY]
       },
       validate: {
         payload: {
@@ -64,7 +68,7 @@ const routes = [
     handler: auth.exchangeCode,
     config: {
       auth: {
-        entity: entities.FIRST_PARTY
+        scope: [scopes.FIRST_PARTY]
       },
       validate: {
         payload: {
@@ -80,7 +84,7 @@ const routes = [
     handler: auth.exchangeCredentials,
     config: {
       auth: {
-        entity: entities.FIRST_PARTY
+        scope: [scopes.FIRST_PARTY]
       },
       validate: {
         payload: {
@@ -106,16 +110,41 @@ const routes = [
     handler: account.create,
     config: {
       auth: {
-        entity: entities.FIRST_PARTY
+        scope: [scopes.FIRST_PARTY]
       },
       validate: {
         payload: {
           email: Joi.string().required().email().max(64).lowercase().trim(),
           username: Joi.string().required().alphanum().min(4).max(12).trim(),
           password: Joi.string().required().min(6).max(32).trim(),
-          firstName: Joi.string().min(1).max(32).trim(),
-          lastName: Joi.string().min(1).max(32).trim()
+          firstName: Joi.string().required().min(1).max(32).trim(),
+          lastName: Joi.string().required().min(1).max(32).trim()
         }
+      }
+    }
+  }, {
+    method: 'PUT',
+    path: '/account/{id}',
+    handler: account.update,
+    config: {
+      auth: {
+        scope: [scopes.FIRST_PARTY],
+        ownershipRule: 'account'
+      },
+      validate: {
+        payload: {
+          password: Joi.string().min(6).max(32).trim()
+        }
+      }
+    }
+  }, {
+    method: 'DELETE',
+    path: '/account/{id}',
+    handler: account.delete,
+    config: {
+      auth: {
+        scope: [scopes.FIRST_PARTY],
+        ownershipRule: 'account'
       }
     }
   },
@@ -124,15 +153,115 @@ const routes = [
   {
     method: 'GET',
     path: '/profile',
-    handler: profile.get,
+    handler: profile.getAuthenticated
+  }, {
+    method: 'GET',
+    path: '/profile/{id}',
+    handler: profile.get
+  }, {
+    method: 'PUT',
+    path: '/profile/{id}',
+    handler: profile.update,
     config: {
+      auth: {
+        ownershipRule: 'profile'
+      },
       validate: {
-        query: {
-          email: Joi.string().required().email().max(64).lowercase().trim()
+        payload: {
+          firstName: Joi.string().min(1).max(32).trim(),
+          lastName: Joi.string().min(1).max(32).trim()
         }
       }
     }
+  },
+
+  // Comment
+  {
+    method: 'GET',
+    path: '/comment/{id}',
+    handler: comment.get
+  }, {
+    method: 'POST',
+    path: '/comment',
+    handler: comment.create,
+    config: {
+      auth: {
+        ownershipRule: 'post'
+      },
+      validate: {
+        payload: {
+          body: Joi.string().required().min(1).max(32).trim(),
+          postId: Joi.string().guid().required()
+        }
+      }
+    }
+  }, {
+    method: 'PUT',
+    path: '/comment/{id}',
+    handler: comment.update,
+    config: {
+      auth: {
+        ownershipRule: 'comment'
+      },
+      validate: {
+        payload: {
+          body: Joi.string().min(1).max(32).trim()
+        }
+      }
+    }
+  }, {
+    method: 'DELETE',
+    path: '/comment/{id}',
+    handler: comment.delete,
+    config: {
+      auth: {
+        ownershipRule: 'comment'
+      }
+    }
+  },
+
+  // Post
+  {
+    method: 'GET',
+    path: '/post/{id}',
+    handler: post.get
+  }, {
+    method: 'POST',
+    path: '/post',
+    handler: post.create,
+    config: {
+      validate: {
+        payload: {
+          body: Joi.string().required().min(1).max(32).trim()
+        }
+      }
+    }
+  }, {
+    method: 'PUT',
+    path: '/post/{id}',
+    handler: post.update,
+    config: {
+      auth: {
+        ownershipRule: 'post'
+      },
+      validate: {
+        payload: {
+          body: Joi.string().min(1).max(32).trim()
+        }
+      }
+    }
+  }, {
+    method: 'DELETE',
+    path: '/post/{id}',
+    handler: post.delete,
+    config: {
+      auth: {
+        ownershipRule: 'post'
+      }
+    }
   }
+
+  // TODO: /feed
 ];
 
 // Catch errors for async handlers

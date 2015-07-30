@@ -1,7 +1,5 @@
 import crypt from './crypt';
-
 import scopes from './scopes';
-import entities from './entities';
 
 import Account from '../models/account';
 import Profile from '../models/profile';
@@ -29,20 +27,19 @@ export default {
     }).save();
   },
 
-  token: async function(accountId, clientId, scope, entity) {
+  token: async function(accountId, clientId, scope) {
     return await new Token({
       value: await crypt.generateToken(),
       accountId: accountId,
       clientId: clientId,
-      scope: scope,
-      entity: entity
+      scope: scope
     }).save();
   },
 
   firstPartyCredentials: async function(username, password, name) {
     const account = await this.account(username, password);
     const client = await this.client(name, account.id);
-    const token = await this.token(account.id, client.id, scopes.all, entities.FIRST_PARTY);
+    const token = await this.token(account.id, client.id, scopes.FIRST_PARTY);
 
     return {
       account,
@@ -54,7 +51,7 @@ export default {
   thirdPartyCredentials: async function(username, password, name) {
     const account = await this.account(username, password);
     const client = await this.client(name, account.id);
-    const token = await this.token(account.id, client.id, scopes.all, entities.THIRD_PARTY);
+    const token = await this.token(account.id, client.id, scopes.THIRD_PARTY);
 
     return {
       account,

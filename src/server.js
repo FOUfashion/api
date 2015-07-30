@@ -1,4 +1,5 @@
 import Hapi from 'hapi';
+import './models';
 
 import cli from './helpers/cli';
 import cliConfig from './config/cli';
@@ -18,9 +19,14 @@ server.register(plugins, error => {
   }
   // $lab:coverage:on$
 
-  // Import strategies
+  // Import auth strategies
   strategies.forEach(strategy => {
     server.auth.strategy(strategy.name, strategy.scheme, strategy.mode, strategy.options);
+  });
+
+  // Set the default strategies
+  auth.strategy.default({
+    strategies: strategies.defaults
   });
 
   // Add the routes

@@ -3,7 +3,7 @@ import acrypto from 'acrypto';
 export default {
   encryptPassword: async function(password, salt, iterations) {
     if (!salt) {
-      salt = await acrypto.randomBytes(64);
+      salt = await acrypto.randomBytes(32);
       salt = salt.toString('hex');
     }
 
