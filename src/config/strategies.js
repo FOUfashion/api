@@ -35,25 +35,35 @@ const strategies = [{
   options: {
     companionStrategy: 'bearer',
     rules: {
-      account: async function(request, credentials, callback) {
+      account: function(request, credentials, callback) {
         const matchesUsername = request.params.id === credentials.account.username;
         const matchesId = request.params.id === credentials.account.id;
         callback(null, matchesUsername || matchesId);
       },
-      profile: async function(request, credentials, callback) {
+      profile: function(request, credentials, callback) {
         const matchesEmail = request.params.id === credentials.profile.email;
         const matchesId = request.params.id === credentials.profile.id;
         callback(null, matchesEmail || matchesId);
       },
       comment: async function(request, credentials, callback) {
         const commentId = request.params.id || request.payload.commentId;
-        const comment = await Comment.get(commentId).run();
-        callback(null, comment.post.accountId === credentials.profile.id);
+
+        try {
+          const comment = await Comment.get(commentId).run();
+          callback(null, comment.post.accountId === credentials.profile.id);
+        } catch (error) {
+          callback(error, false);
+        }
       },
       post: async function(request, credentials, callback) {
         const postId = request.params.id || request.payload.postId;
-        const post = await Post.get(postId).run();
-        callback(null, post.accountId === credentials.profile.id);
+
+        try {
+          const post = await Post.get(postId).run();
+          callback(null, post.accountId === credentials.profile.id);
+        } catch (error) {
+          callback(error, false);
+        }
       }
     }
   }
