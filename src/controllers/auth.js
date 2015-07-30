@@ -10,6 +10,18 @@ import Code from '../models/code';
 
 class AuthCtrl {
 
+  async logIn(request, reply) {
+    const account = await Account.get(request.payload.username).run();
+    const matches = await crypt.passwordsMatch(account.password, request.payload.password);
+
+    if (!matches) {
+      return reply(Boom.unauthorized('Invalid password'));
+    }
+
+    delete account.password;
+    reply(account);
+  }
+
   async authorize(request, reply) {
     const scope = request.payload.scope.replace(/,*\s/g, ',').split(',');
     const client = await Client.get(request.payload.clientId).run();

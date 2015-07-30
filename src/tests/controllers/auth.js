@@ -16,6 +16,48 @@ lab.experiment('AuthCtrl', function() {
     data.sync().then(done, done);
   });
 
+  lab.test('[logIn] returns the account on success', function(done) {
+    const options = {
+      method: 'POST',
+      url: '/login',
+      headers: {
+        'Authorization': `Bearer ${data.tp.token.value}`
+      },
+      payload: {
+        username: data.account.username,
+        password: data.account.unencryptedPassword
+      }
+    };
+
+    server.inject(options, function(response) {
+      const result = response.result;
+
+      expect(response.statusCode).to.equal(200);
+      expect(result.username).to.equal(data.account.username);
+
+      done();
+    });
+  });
+
+  lab.test('[logIn] returns 401 for invalid password', function(done) {
+    const options = {
+      method: 'POST',
+      url: '/login',
+      headers: {
+        'Authorization': `Bearer ${data.tp.token.value}`
+      },
+      payload: {
+        username: data.account.username,
+        password: '1337'
+      }
+    };
+
+    server.inject(options, function(response) {
+      expect(response.statusCode).to.equal(401);
+      done();
+    });
+  });
+
   lab.test('[authorize] returns an oauth code for exchange', function(done) {
     const options = {
       method: 'POST',

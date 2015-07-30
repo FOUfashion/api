@@ -30,6 +30,18 @@ const routes = [
   // Auth
   {
     method: 'POST',
+    path: '/login',
+    handler: auth.logIn,
+    config: {
+      validate: {
+        payload: {
+          username: Joi.string().required(),
+          password: Joi.string().required()
+        }
+      }
+    }
+  }, {
+    method: 'POST',
     path: '/oauth/authorize',
     handler: auth.authorize,
     config: {
