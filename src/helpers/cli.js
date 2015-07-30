@@ -22,7 +22,7 @@ cli.delimiter('api~$');
 cli.banner(banner);
 
 // Basic auth
-cli.auth('basics', {
+cli.auth('basic', {
   users: [{
     user: process.env.API_CLI_USER,
     pass: process.env.API_CLI_PASS
