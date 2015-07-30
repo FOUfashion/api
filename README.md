@@ -22,7 +22,8 @@ The API was built with a focus on performance, intuitiveness and ease of use wit
 
 ## To-Do :dizzy:
 
-- handle DELETE requests properly: some joined documents to not get deleted
+- implement a socket-based messaging system
+- expose RethinkDB post feeds (through sockets)
 
 ## Pre-Requisites :computer:
 
