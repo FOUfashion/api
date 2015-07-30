@@ -25,7 +25,7 @@ server.register(plugins, error => {
   });
 
   // Set the default strategies
-  auth.strategy.default({
+  server.auth.strategy.default({
     strategies: strategies.defaults
   });
 

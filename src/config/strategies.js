@@ -7,7 +7,6 @@ import Post from '../models/post';
 const strategies = [{
   name: 'bearer',
   scheme: 'bearer-access-token',
-  mode: 'required',
   options: {
     validateFunc: async function(accessToken, callback) {
       try {
@@ -33,7 +32,6 @@ const strategies = [{
 }, {
   name: 'ownership',
   scheme: 'ownership-access',
-  mode: 'required',
   options: {
     rules: {
       account: async function(request, credentials, callback) {
