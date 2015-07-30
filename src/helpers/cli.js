@@ -21,6 +21,14 @@ const cli = new Vantage();
 cli.delimiter('api~$');
 cli.banner(banner);
 
+// Basic auth
+cli.auth('basics', {
+  users: [{
+    user: process.env.API_CLI_USER,
+    pass: process.env.API_CLI_PASS
+  }]
+});
+
 // $lab:coverage:off$
 cli
   .command('account')
