@@ -31,8 +31,8 @@ cli.banner(banner);
 // Basic auth
 cli.auth('basic', {
   users: [{
-    user: process.env.API_CLI_USER,
-    pass: process.env.API_CLI_PASS
+    user: process.env.API_CLI_USER || 'admin',
+    pass: process.env.API_CLI_PASS || 'admin'
   }]
 });
 
