@@ -21,6 +21,14 @@ const cli = new Vantage();
 cli.delimiter('api~$');
 cli.banner(banner);
 
+// Basic auth
+cli.auth('basic', {
+  users: [{
+    user: process.env.API_CLI_USER,
+    pass: process.env.API_CLI_PASS
+  }]
+});
+
 // $lab:coverage:off$
 cli
   .command('account')
@@ -54,15 +62,12 @@ cli
   .option('-a, --account <account>', 'The ID of the account that owns this client.')
   .option('-c, --client <client>', 'The ID of the client that owns this token.')
   .option('-s, --scope <scope>', 'The scopes for this token, separated by commas.')
-  .option('-e, --entity <entity>', 'The entity type for this token. Can be `app`, `user` or `any`.')
   .description('Create a new Token.')
   .action(async function(args) {
     const accountId = args.options.account;
     const clientId = args.options.client;
     const scope = args.options.scope.replace(/\s/g, '').split(',');
-    const entity = args.options.entity;
-
-    const token = await this.token(accountId, clientId, scope, entity);
+    const token = await this.token(accountId, clientId, scope);
     console.log(token);
   });
 

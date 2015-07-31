@@ -24,8 +24,8 @@ lab.experiment('AuthCtrl', function() {
         'Authorization': `Bearer ${data.fp.token.value}`
       },
       payload: {
-        username: data.account.username,
-        password: data.account.unencryptedPassword
+        username: data.tp.account.username,
+        password: data.tp.account.unencryptedPassword
       }
     };
 
@@ -33,8 +33,27 @@ lab.experiment('AuthCtrl', function() {
       const result = response.result;
 
       expect(response.statusCode).to.equal(200);
-      expect(result.username).to.equal(data.account.username);
+      expect(result.username).to.equal(data.tp.account.username);
 
+      done();
+    });
+  });
+
+  lab.test('[logIn] returns 401 for invalid username', function(done) {
+    const options = {
+      method: 'POST',
+      url: '/login',
+      headers: {
+        'Authorization': `Bearer ${data.fp.token.value}`
+      },
+      payload: {
+        username: '133744',
+        password: data.tp.account.unencryptedPassword
+      }
+    };
+
+    server.inject(options, function(response) {
+      expect(response.statusCode).to.equal(401);
       done();
     });
   });
@@ -47,8 +66,8 @@ lab.experiment('AuthCtrl', function() {
         'Authorization': `Bearer ${data.fp.token.value}`
       },
       payload: {
-        username: data.account.username,
-        password: '1337'
+        username: data.tp.account.username,
+        password: '133744'
       }
     };
 
@@ -67,7 +86,7 @@ lab.experiment('AuthCtrl', function() {
       },
       payload: {
         scope: oauthScope,
-        clientId: data.client.id
+        clientId: data.tp.client.id
       }
     };
 
@@ -76,7 +95,7 @@ lab.experiment('AuthCtrl', function() {
       oauthCode = result.value;
 
       expect(response.statusCode).to.equal(200);
-      expect(result.clientId).to.equal(data.client.id);
+      expect(result.clientId).to.equal(data.tp.client.id);
       expect(result.value).to.exist();
 
       done();
@@ -92,7 +111,7 @@ lab.experiment('AuthCtrl', function() {
       },
       payload: {
         code: oauthCode,
-        clientId: data.client.id,
+        clientId: data.tp.client.id,
         clientSecret: 'ItsNotASecretIfYouToldEverybody'
       }
     };
@@ -112,8 +131,8 @@ lab.experiment('AuthCtrl', function() {
       },
       payload: {
         code: oauthCode,
-        clientId: data.client.id,
-        clientSecret: data.client.secret
+        clientId: data.tp.client.id,
+        clientSecret: data.tp.client.secret
       }
     };
 
@@ -137,8 +156,8 @@ lab.experiment('AuthCtrl', function() {
       },
       payload: {
         code: '10240',
-        clientId: data.client.id,
-        clientSecret: data.client.secret
+        clientId: data.tp.client.id,
+        clientSecret: data.tp.client.secret
       }
     };
 
@@ -157,8 +176,8 @@ lab.experiment('AuthCtrl', function() {
       },
       payload: {
         code: oauthCode,
-        clientId: data.client.id,
-        clientSecret: data.client.secret
+        clientId: data.tp.client.id,
+        clientSecret: data.tp.client.secret
       }
     };
 
@@ -176,8 +195,8 @@ lab.experiment('AuthCtrl', function() {
         'Authorization': `Bearer ${data.fp.token.value}`
       },
       payload: {
-        username: data.account.username,
-        password: data.account.unencryptedPassword
+        username: data.tp.account.username,
+        password: data.tp.account.unencryptedPassword
       }
     };
 
@@ -199,7 +218,7 @@ lab.experiment('AuthCtrl', function() {
         'Authorization': `Bearer ${data.fp.token.value}`
       },
       payload: {
-        username: data.account.username,
+        username: data.tp.account.username,
         password: '1337'
       }
     };

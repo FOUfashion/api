@@ -3,7 +3,7 @@ import acrypto from 'acrypto';
 export default {
   encryptPassword: async function(password, salt, iterations) {
     if (!salt) {
-      salt = await acrypto.randomBytes(64);
+      salt = await acrypto.randomBytes(32);
       salt = salt.toString('hex');
     }
 
@@ -18,10 +18,10 @@ export default {
 
     return `${salt}:${key}:${iterations}`;
   },
-  passwordsMatch: async function(original, check) {
-    const [salt, key, iterations] = original.split(':');
-    const encrypted = await this.encryptPassword(check, salt, iterations);
-    return original === encrypted;
+  passwordsMatch: async function(baseEncrypted, toCheck) {
+    const [salt, key, iterations] = baseEncrypted.split(':');
+    const encrypted = await this.encryptPassword(toCheck, salt, iterations);
+    return baseEncrypted === encrypted;
   },
   generateToken: async function() {
     const token = await acrypto.randomBytes(16);

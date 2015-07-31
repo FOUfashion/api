@@ -48,7 +48,7 @@ lab.experiment('AccountCtrl', function() {
   lab.test('[get] returns the correct account by id', function(done) {
     const options = {
       method: 'GET',
-      url: '/account/' + data.account.id,
+      url: '/account/' + data.tp.account.id,
       headers: {
         'Authorization': `Bearer ${data.fp.token.value}`
       }
@@ -58,7 +58,7 @@ lab.experiment('AccountCtrl', function() {
       const result = response.result;
 
       expect(response.statusCode).to.equal(200);
-      expect(result.id).to.equal(data.account.id);
+      expect(result.id).to.equal(data.tp.account.id);
 
       done();
     });
@@ -67,7 +67,7 @@ lab.experiment('AccountCtrl', function() {
   lab.test('[get] returns the correct account by username', function(done) {
     const options = {
       method: 'GET',
-      url: '/account/' + data.account.username,
+      url: '/account/' + data.tp.account.username,
       headers: {
         'Authorization': `Bearer ${data.fp.token.value}`
       }
@@ -77,7 +77,7 @@ lab.experiment('AccountCtrl', function() {
       const result = response.result;
 
       expect(response.statusCode).to.equal(200);
-      expect(result.username).to.equal(data.account.username);
+      expect(result.username).to.equal(data.tp.account.username);
 
       done();
     });

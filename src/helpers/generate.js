@@ -1,7 +1,5 @@
 import crypt from './crypt';
-
 import scopes from './scopes';
-import entities from './entities';
 
 import Account from '../models/account';
 import Profile from '../models/profile';
@@ -10,10 +8,11 @@ import Token from '../models/token';
 
 export default {
 
-  account: async function(username, password) {
+  account: async function(username, password, profile) {
     return await new Account({
       username: username,
-      password: await crypt.encryptPassword(password)
+      password: await crypt.encryptPassword(password),
+      profile: profile
     }).save();
   },
 
@@ -29,32 +28,29 @@ export default {
     }).save();
   },
 
-  token: async function(accountId, clientId, scope, entity) {
+  token: async function(accountId, clientId, scope) {
     return await new Token({
       value: await crypt.generateToken(),
       accountId: accountId,
       clientId: clientId,
-      scope: scope,
-      entity: entity
+      scope: scope
     }).save();
   },
 
-  firstPartyCredentials: async function(username, password, name) {
-    const account = await this.account(username, password);
-    const client = await this.client(name, account.id);
-    const token = await this.token(account.id, client.id, scopes.all, entities.FIRST_PARTY);
-
-    return {
-      account,
-      client,
-      token
-    };
+  firstPartyCredentials: function(data) {
+    return this.credentials([scopes.FIRST_PARTY], data);
   },
 
-  thirdPartyCredentials: async function(username, password, name) {
-    const account = await this.account(username, password);
-    const client = await this.client(name, account.id);
-    const token = await this.token(account.id, client.id, scopes.all, entities.THIRD_PARTY);
+  thirdPartyCredentials: function(data) {
+    return this.credentials([scopes.THIRD_PARTY], data);
+  },
+
+  credentials: async function(scope, { username, password, clientName, profile }) {
+    const account = await this.account(username, password, profile);
+    account.unencryptedPassword = password;
+
+    const client = await this.client(clientName, account.id);
+    const token = await this.token(account.id, client.id, scope);
 
     return {
       account,

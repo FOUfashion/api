@@ -10,9 +10,21 @@ The API was built with a focus on performance, intuitiveness and ease of use wit
 ## Features :boom:
 
 - RESTful architecture fully decoupled from the clients
-- implements OAuth 2 flow with the following grant types:
+- CRUD routes with ACL based on token scope and resource ownership
+- OAuth 2 flow with the following grant types:
   - *Authorization Code* for third party clients
   - *Authorization Code* or *Resource Owner Password Credentials* for first party clients
+- passwords
+  - encrypted with the [PBKDF2](https://en.wikipedia.org/wiki/PBKDF2) function
+  - a 256-bit key is derived with `sha256` using a 256-bit salt and 8192 iterations => encryption is both fast and secure
+  - passwords NEVER leave the API server
+
+## To-Do :dizzy:
+
+- implement a socket-based messaging system with [hapi-io](https://github.com/sibartlett/hapi-io)
+- expose RethinkDB post feeds (through sockets)
+- use SSL for Vantage connections
+- service emails
 
 ## Pre-Requisites :computer:
 
@@ -66,6 +78,10 @@ $ npm run lint
 $ npm run lint-watch
 ```
 
+## Endpoints :golf:
+
+The API blueprint is available at [docs.fou.apiary.io](http://docs.fou.apiary.io/). Other docs like the database diagram are included there.
+
 ## Server CLI :pager:
 
 The API uses [Vantage](https://github.com/dthree/vantage) to create a remote CLI intended only for private use. It is used to create resources and generate auth credentials for first-party clients without exposing these abilities to everyone else.
@@ -75,7 +91,9 @@ The API uses [Vantage](https://github.com/dthree/vantage) to create a remote CLI
 $ npm intall -g vantage
 
 # enable the CLI
-$ export CLI_ENABLED=true
+$ export API_CLI_ENABLED=true
+$ export API_CLI_USER=admin
+$ export API_CLI_PASS=admin
 
 # start the server
 $ npm start
@@ -83,6 +101,8 @@ $ npm start
 # connect to the CLI
 $ vantage 127.0.0.1:4000
 ```
+
+You'll need to authenticate with the specified credentials.
 
 ## IDE and linting :star:
 

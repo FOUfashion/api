@@ -14,7 +14,7 @@ lab.experiment('ProfileCtrl', function() {
   lab.test('[get] returns the correct profile by email', function(done) {
     const options = {
       method: 'GET',
-      url: `/profile?email=${encodeURIComponent(data.profile.email)}`,
+      url: `/profile/${encodeURIComponent(data.tp.account.profile.email)}`,
       headers: {
         'Authorization': `Bearer ${data.fp.token.value}`
       }
@@ -24,7 +24,7 @@ lab.experiment('ProfileCtrl', function() {
       const result = response.result;
 
       expect(response.statusCode).to.equal(200);
-      expect(result.email).to.equal(data.profile.email);
+      expect(result.email).to.equal(data.tp.account.profile.email);
 
       done();
     });
@@ -33,7 +33,7 @@ lab.experiment('ProfileCtrl', function() {
   lab.test('[get] returns 404 if not found by email', function(done) {
     const options = {
       method: 'GET',
-      url: `/profile?email=${encodeURIComponent('not@found.com')}`,
+      url: `/profile/${encodeURIComponent('not@found.com')}`,
       headers: {
         'Authorization': `Bearer ${data.fp.token.value}`
       }

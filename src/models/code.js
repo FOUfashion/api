@@ -1,8 +1,5 @@
 import thinky, {type, r} from '../helpers/thinky';
 
-import Account from './account';
-import Client from './client';
-
 const Code = thinky.createModel('Code', {
   value: type.string().required(),
   accountId: type.string().required(),
@@ -13,8 +10,5 @@ const Code = thinky.createModel('Code', {
 }, {
   pk: 'value'
 });
-
-Code.belongsTo(Account, 'account', 'accountId', 'id');
-Code.belongsTo(Client, 'client', 'clientId', 'id');
 
 export default Code;
