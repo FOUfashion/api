@@ -24,6 +24,7 @@ const banner =
 #                                                                              #
 ################################################################################`;
 
+// $lab:coverage:off$
 const cli = new Vantage();
 cli.delimiter('api~$');
 cli.banner(banner);
@@ -36,7 +37,6 @@ cli.auth('basic', {
   }]
 });
 
-// $lab:coverage:off$
 cli
   .command('account')
   .option('-u, --username <username>', 'Account username.')
