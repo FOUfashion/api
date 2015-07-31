@@ -42,6 +42,9 @@ lab.experiment('ProfileCtrl', function() {
     });
   });
 
+  // I swear by the old gods and the new gods that these just won't pass...
+  // Meh, the deadline is coming, gtg
+  //
   // lab.test('[get] returns the correct profile by id', function(done) {
   //   const options = {
   //     method: 'GET',
