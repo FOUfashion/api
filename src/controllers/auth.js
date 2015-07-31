@@ -11,7 +11,7 @@ import Code from '../models/code';
 class AuthCtrl {
 
   async logIn(request, reply) {
-    const account = await Account.get(request.payload.username).run();
+    const account = await Account.get(request.payload.username).getJoin({ profile: true }).run();
     const matches = await crypt.passwordsMatch(account.password, request.payload.password);
 
     if (!matches) {

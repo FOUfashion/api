@@ -16,7 +16,7 @@ lab.experiment('AuthCtrl', function() {
     data.sync().then(done, done);
   });
 
-  lab.test('[logIn] returns the account on success', function(done) {
+  lab.test('[logIn] returns the account and profile on success', function(done) {
     const options = {
       method: 'POST',
       url: '/login',
@@ -34,6 +34,7 @@ lab.experiment('AuthCtrl', function() {
 
       expect(response.statusCode).to.equal(200);
       expect(result.username).to.equal(data.tp.account.username);
+      expect(result.profile).to.not.be.undefined();
 
       done();
     });
