@@ -9,7 +9,7 @@ COPY package.json /app/
 COPY build/ /app/build/
 
 # Install deps
-RUN npm install
+RUN npm install --quiet --production
 
 # Start command
 CMD ["npm", "start"]
