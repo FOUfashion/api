@@ -152,35 +152,28 @@ const routes = [
     method: 'GET',
     path: '/profile',
     handler: profile.getAuthenticated
+  }, {
+    method: 'GET',
+    path: '/profile/{id}',
+    handler: profile.get
+  }, {
+    method: 'PUT',
+    path: '/profile/{id}',
+    handler: profile.update,
+    config: {
+      plugins: {
+        hapiAuthOwnership: {
+          ownershipRule: 'profile'
+        }
+      },
+      validate: {
+        payload: {
+          firstName: Joi.string().min(1).max(32).trim(),
+          lastName: Joi.string().min(1).max(32).trim()
+        }
+      }
+    }
   },
-
-  // Batman told me to comment these out. Why? There's something weird going on. The handlers don't work.
-  // It's something I cannot understand. Something beyond my comprehension. I'd better call wonder woman...
-  //
-  // Keep reading if you don't get this ^
-  //
-  // }, {
-  //   method: 'GET',
-  //   path: '/profile/{id}',
-  //   handler: profile.get
-  // }, {
-  //   method: 'PUT',
-  //   path: '/profile/{id}',
-  //   handler: profile.update,
-  //   config: {
-  //     plugins: {
-  //       hapiAuthOwnership: {
-  //         ownershipRule: 'profile'
-  //       }
-  //     },
-  //     validate: {
-  //       payload: {
-  //         firstName: Joi.string().min(1).max(32).trim(),
-  //         lastName: Joi.string().min(1).max(32).trim()
-  //       }
-  //     }
-  //   }
-  // },
 
   // Comment
   {

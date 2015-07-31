@@ -42,46 +42,43 @@ lab.experiment('ProfileCtrl', function() {
     });
   });
 
-  // I swear by the old gods and the new gods that these just won't pass...
-  // Meh, the deadline is coming, gtg
-  //
-  // lab.test('[get] returns the correct profile by id', function(done) {
-  //   const options = {
-  //     method: 'GET',
-  //     url: `/profile/${data.tp.account.profile.id}`,
-  //     headers: {
-  //       'Authorization': `Bearer ${data.fp.token.value}`
-  //     }
-  //   };
-  //
-  //   server.inject(options, function(response) {
-  //     const result = response.result;
-  //
-  //     expect(response.statusCode).to.equal(200);
-  //     expect(result.id).to.equal(data.tp.account.profile.id);
-  //
-  //     done();
-  //   });
-  // });
+  lab.test('[get] returns the correct profile by id', function(done) {
+    const options = {
+      method: 'GET',
+      url: `/profile/${data.tp.account.profile.id}`,
+      headers: {
+        'Authorization': `Bearer ${data.fp.token.value}`
+      }
+    };
 
-  // lab.test('[get] returns the correct profile by email', function(done) {
-  //   const options = {
-  //     method: 'GET',
-  //     url: `/profile/${encodeURIComponent(data.tp.account.profile.email)}`,
-  //     headers: {
-  //       'Authorization': `Bearer ${data.fp.token.value}`
-  //     }
-  //   };
-  //
-  //   server.inject(options, function(response) {
-  //     const result = response.result;
-  //
-  //     expect(response.statusCode).to.equal(200);
-  //     expect(result.email).to.equal(data.tp.account.profile.email);
-  //
-  //     done();
-  //   });
-  // });
+    server.inject(options, function(response) {
+      const result = response.result;
+
+      expect(response.statusCode).to.equal(200);
+      expect(result.id).to.equal(data.tp.account.profile.id);
+
+      done();
+    });
+  });
+
+  lab.test('[get] returns the correct profile by email', function(done) {
+    const options = {
+      method: 'GET',
+      url: `/profile/${encodeURIComponent(data.tp.account.profile.email)}`,
+      headers: {
+        'Authorization': `Bearer ${data.fp.token.value}`
+      }
+    };
+
+    server.inject(options, function(response) {
+      const result = response.result;
+
+      expect(response.statusCode).to.equal(200);
+      expect(result.email).to.equal(data.tp.account.profile.email);
+
+      done();
+    });
+  });
 
   lab.test('[get] returns 404 if not found by id', function(done) {
     const options = {
@@ -113,48 +110,66 @@ lab.experiment('ProfileCtrl', function() {
     });
   });
 
-  // lab.test('[update] returns the profile with a new first name (by id)', function(done) {
-  //   const options = {
-  //     method: 'PUT',
-  //     url: `/profile/${data.tp.account.profile.id}`,
-  //     headers: {
-  //       'Authorization': `Bearer ${data.fp.token.value}`
-  //     },
-  //     payload: {
-  //       firstName: 'Gargantua'
-  //     }
-  //   };
-  //
-  //   server.inject(options, function(response) {
-  //     const result = response.result;
-  //
-  //     expect(response.statusCode).to.equal(200);
-  //     expect(result.name.first).to.equal('Gargantua');
-  //
-  //     done();
-  //   });
-  // });
+  lab.test('[update] returns the profile with a new first name (by id)', function(done) {
+    const options = {
+      method: 'PUT',
+      url: `/profile/${data.tp.account.profile.id}`,
+      headers: {
+        'Authorization': `Bearer ${data.tp.token.value}`
+      },
+      payload: {
+        firstName: 'Gargantua'
+      }
+    };
 
-  // lab.test('[update] returns the profile with a new last name (by email)', function(done) {
-  //   const options = {
-  //     method: 'PUT',
-  //     url: `/profile/${data.tp.account.profile.email}`,
-  //     headers: {
-  //       'Authorization': `Bearer ${data.fp.token.value}`
-  //     },
-  //     payload: {
-  //       lastName: 'Gargantua2'
-  //     }
-  //   };
-  //
-  //   server.inject(options, function(response) {
-  //     const result = response.result;
-  //
-  //     expect(response.statusCode).to.equal(200);
-  //     expect(result.name.last).to.equal('Gargantua2');
-  //
-  //     done();
-  //   });
-  // });
+    server.inject(options, function(response) {
+      const result = response.result;
+
+      expect(response.statusCode).to.equal(200);
+      expect(result.name.first).to.equal('Gargantua');
+
+      done();
+    });
+  });
+
+  lab.test('[update] returns the profile with a new last name (by email)', function(done) {
+    const options = {
+      method: 'PUT',
+      url: `/profile/${data.tp.account.profile.email}`,
+      headers: {
+        'Authorization': `Bearer ${data.tp.token.value}`
+      },
+      payload: {
+        lastName: 'Batman'
+      }
+    };
+
+    server.inject(options, function(response) {
+      const result = response.result;
+
+      expect(response.statusCode).to.equal(200);
+      expect(result.name.last).to.equal('Batman');
+
+      done();
+    });
+  });
+
+  lab.test('[update] returns 401 if trying to update someone else\'s profile', function(done) {
+    const options = {
+      method: 'PUT',
+      url: `/profile/${data.tp.account.profile.email}`,
+      headers: {
+        'Authorization': `Bearer ${data.fp.token.value}`
+      },
+      payload: {
+        lastName: 'Batman'
+      }
+    };
+
+    server.inject(options, function(response) {
+      expect(response.statusCode).to.equal(401);
+      done();
+    });
+  });
 
 });

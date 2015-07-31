@@ -36,14 +36,11 @@ const strategies = [{
   options: {
     companionStrategy: 'bearer',
     rules: {
-      // Yep, connected to the other magical weird Gandalf-knows-why stuff.
-      // Keep reading if you don't understand this.
-      //
-      // profile: function(request, credentials, callback) {
-      //   const matchesEmail = request.params.id === credentials.profile.email;
-      //   const matchesId = request.params.id === credentials.account.profile.id;
-      //   callback(null, matchesEmail || matchesId);
-      // },
+      profile: function(request, credentials, callback) {
+        const matchesEmail = request.params.id === credentials.account.profile.email;
+        const matchesId = request.params.id === credentials.account.profile.id;
+        callback(null, matchesEmail || matchesId);
+      },
 
       comment: async function(request, credentials, callback) {
         try {
