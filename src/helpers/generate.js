@@ -1,5 +1,5 @@
-import crypt from './crypt';
 import scopes from './scopes';
+import crypt from './crypt';
 
 import Account from '../models/account';
 import Profile from '../models/profile';
@@ -13,11 +13,7 @@ export default {
       username: username,
       password: await crypt.encryptPassword(password),
       profile: profile
-    }).save();
-  },
-
-  profile: async function(accountId, email, name) {
-    return await new Profile({ accountId, email, name }).save();
+    }).saveAll();
   },
 
   client: async function(name, accountId) {

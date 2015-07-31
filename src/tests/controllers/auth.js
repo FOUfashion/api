@@ -39,7 +39,7 @@ lab.experiment('AuthCtrl', function() {
     });
   });
 
-  lab.test('[logIn] returns 401 for invalid username', function(done) {
+  lab.test('[logIn] returns 404 for invalid username', function(done) {
     const options = {
       method: 'POST',
       url: '/login',
@@ -53,7 +53,7 @@ lab.experiment('AuthCtrl', function() {
     };
 
     server.inject(options, function(response) {
-      expect(response.statusCode).to.equal(401);
+      expect(response.statusCode).to.equal(404);
       done();
     });
   });

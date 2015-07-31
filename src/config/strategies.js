@@ -10,13 +10,8 @@ const strategies = [{
   options: {
     validateFunc: async function(accessToken, callback) {
       try {
-        const token = await Token.get(accessToken).getJoin().run();
+        const token = await Token.get(accessToken).getJoin({ account: true, client: true }).run();
         delete token.account.password;
-
-        console.log('credentials', {
-          client: token.client,
-          scope: token.scope
-        });
 
         callback(null, true, {
           account: token.account,

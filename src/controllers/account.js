@@ -6,11 +6,34 @@ import Profile from '../models/profile';
 class AccountCtrl {
 
   async getAuthenticated(request, reply) {
-    reply(await Account.find(request.auth.credentials.account.username));
+    const account = await Account
+      .get(request.auth.credentials.account.username)
+      .getJoin({ profile: true })
+      .run();
+
+    delete account.password;
+    reply(account);
   }
 
   async get(request, reply) {
-    reply(await Account.find(request.params.id));
+    const idOrUsername = request.params.id;
+    let account;
+
+    if (idOrUsername.includes('-')) {
+      account = await Account
+        .filter({ id: idOrUsername })
+        .getJoin({ profile: true })
+        .nth(0)
+        .run();
+    } else {
+      account = await Account
+        .get(idOrUsername)
+        .getJoin({ profile: true })
+        .run();
+    }
+
+    delete account.password;
+    reply(account);
   }
 
   async create(request, reply) {
@@ -32,19 +55,34 @@ class AccountCtrl {
   }
 
   async update(request, reply) {
-    const account = await Account.find(request.params.id, false);
+    const idOrUsername = request.params.id;
+    let account;
+
+    if (idOrUsername.includes('-')) {
+      account = await Account.filter({ id: idOrUsername }).nth(0).run();
+    } else {
+      account = await Account.get(idOrUsername).run();
+    }
 
     if (request.payload.password) {
       account.password = await crypt.encryptPassword(request.payload.password);
       await account.save();
-      delete account.password;
     }
 
+    delete account.password;
     reply(account);
   }
 
   async delete(request, reply) {
-    const account = await Account.find(request.params.id, false);
+    const idOrUsername = request.params.id;
+    let account;
+
+    if (idOrUsername.includes('-')) {
+      account = await Account.filter({ id: idOrUsername }).nth(0).run();
+    } else {
+      account = await Account.get(idOrUsername).run();
+    }
+
     await account.deleteAll();
     reply().status(204);
   }

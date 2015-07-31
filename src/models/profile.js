@@ -16,30 +16,4 @@ const Profile = thinky.createModel('Profile', {
   pk: 'email'
 });
 
-// Query by id or email
-Profile.defineStatic('find', async function(idOrEmail, join = true) {
-  if (!idOrEmail.includes('@')) {
-    let query = Profile.filter({ id: idOrEmail });
-
-    if (join) {
-      query = query.getJoin();
-    }
-
-    const profiles = await query.run();
-
-    if (profiles.length > 0) {
-      return profiles[0];
-    }
-  }
-
-  // Must be a username
-  let query = Profile.get(idOrEmail);
-
-  if (join) {
-    query = query.getJoin();
-  }
-
-  return await query.run();
-});
-
 export default Profile;

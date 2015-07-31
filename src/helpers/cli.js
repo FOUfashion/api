@@ -1,5 +1,12 @@
 import Vantage from 'vantage';
-import generate from './generate';
+
+import scopes from './scopes';
+import crypt from './crypt';
+
+import Account from '../models/account';
+import Profile from '../models/profile';
+import Client from '../models/client';
+import Token from '../models/token';
 
 const banner =
 `################################################################################
@@ -33,6 +40,9 @@ cli.auth('basic', {
 cli
   .command('account')
   .option('-u, --username <username>', 'Account username.')
+  .option('-e, --email <email>', 'Profile email.')
+  .option('-f, --first <first>', 'Profile first name.')
+  .option('-l, --last <last>', 'Profile last name.')
   .description('Create a new Account.')
   .action(async function(args) {
     const password = await new Promise(resolve => {
@@ -43,8 +53,19 @@ cli
       }, resolve);
     });
 
-    const account = await generate.account(args.options.username, password);
-    console.log(account);
+    const account = await new Account({
+      username: args.options.username,
+      password: await crypt.encryptPassword(password),
+      profile: {
+        email: args.options.email,
+        name: {
+          first: args.options.first,
+          last: args.options.last
+        }
+      }
+    }).saveAll();
+
+    this.log(account);
   });
 
 cli
@@ -53,8 +74,13 @@ cli
   .option('-a, --account <account>', 'The ID of the account that owns this client.')
   .description('Create a new Client.')
   .action(async function(args) {
-    const client = await generate.client(args.options.name, args.options.account);
-    console.log(client);
+    const client = await new Client({
+      name: args.options.name,
+      secret: await crypt.generateSecret(),
+      accountId: args.options.account
+    }).save();
+
+    this.log(client);
   });
 
 cli
@@ -64,16 +90,22 @@ cli
   .option('-s, --scope <scope>', 'The scopes for this token, separated by commas.')
   .description('Create a new Token.')
   .action(async function(args) {
-    const accountId = args.options.account;
-    const clientId = args.options.client;
-    const scope = args.options.scope.replace(/\s/g, '').split(',');
-    const token = await this.token(accountId, clientId, scope);
-    console.log(token);
+    const token = await new Token({
+      value: await crypt.generateToken(),
+      accountId: args.options.account,
+      clientId: args.options.client,
+      scope: args.options.scope.replace(/\s/g, '').split(',')
+    }).save();
+
+    this.log(token);
   });
 
 cli
   .command('fp')
   .option('-u, --username <username>', 'Account username.')
+  .option('-e, --email <email>', 'Profile email.')
+  .option('-f, --first <first>', 'Profile first name.')
+  .option('-l, --last <last>', 'Profile last name.')
   .option('-n, --name <name>', 'Client name.')
   .description('Generate auth credentials for a first-party client.')
   .action(async function(args) {
@@ -85,11 +117,34 @@ cli
       }, result => resolve(result.password));
     });
 
-    const fp = await generate.firstPartyCredentials(args.options.username, password, args.options.name);
+    const account = await new Account({
+      username: args.options.username,
+      password: await crypt.encryptPassword(password),
+      profile: {
+        email: args.options.email,
+        name: {
+          first: args.options.first,
+          last: args.options.last
+        }
+      }
+    }).saveAll();
 
-    console.log('Client ID:', fp.client.id);
-    console.log('Client Secret:', fp.client.secret);
-    console.log('Token:', fp.token.value);
+    const client = await new Client({
+      name: args.options.name,
+      secret: await crypt.generateSecret(),
+      accountId: account.id
+    }).save();
+
+    const token = await new Token({
+      value: await crypt.generateToken(),
+      accountId: account.id,
+      clientId: client.id,
+      scope: scopes.ALL
+    }).save();
+
+    this.log('Client ID:', client.id);
+    this.log('Client Secret:', client.secret);
+    this.log('Token:', token.value);
   });
 
 export default cli;

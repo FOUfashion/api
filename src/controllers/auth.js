@@ -74,7 +74,7 @@ class AuthCtrl {
       value: await crypt.generateToken(),
       accountId: account.id,
       clientId: request.auth.credentials.client.id,
-      scope: scopes.all
+      scope: scopes.ALL
     }).save();
 
     token.scope = token.scope.join(' ');

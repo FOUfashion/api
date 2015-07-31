@@ -80,7 +80,9 @@ $ npm run lint-watch
 
 ## Endpoints :golf:
 
-The API blueprint is available at [docs.fou.apiary.io](http://docs.fou.apiary.io/). Other docs like the database diagram are included there.
+The API blueprint is available at [docs.fou.apiary.io](http://docs.fou.apiary.io/).
+
+Other docs like the database diagram are included there.
 
 ## Server CLI :pager:
 

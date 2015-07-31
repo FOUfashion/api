@@ -3,16 +3,50 @@ import Profile from '../models/profile';
 class ProfileCtrl {
 
   async getAuthenticated(request, reply) {
-    console.log('profil getauth', request.auth.credentials.account);
-    reply(await Profile.find(request.auth.credentials.account.profile.email));
+    const profile = await Profile
+      .get(request.auth.credentials.account.profile.email)
+      .getJoin({ account: true })
+      .run();
+
+    reply(profile);
   }
 
   async get(request, reply) {
-    reply(await Profile.find(request.params.id));
+    const idOrEmail = request.params.id;
+    let profile;
+
+    if (idOrEmail.includes('@')) {
+      profile = await Profile
+        .get(idOrEmail)
+        .getJoin({ account: true })
+        .run();
+    } else {
+      profile = await Profile
+        .filter({ id: idOrEmail })
+        .getJoin({ account: true })
+        .nth(0)
+        .run();
+    }
+
+    return profile;
   }
 
   async update(request, reply) {
-    const profile = await Profile.find(request.params.id, false);
+    const idOrEmail = request.params.id;
+    let profile;
+
+    if (idOrEmail.includes('@')) {
+      profile = await Profile
+        .get(idOrEmail)
+        .getJoin({ account: true })
+        .run();
+    } else {
+      profile = await Profile
+        .filter({ id: idOrEmail })
+        .getJoin({ account: true })
+        .nth(0)
+        .run();
+    }
 
     if (request.params.first) {
       profile.name.first = request.params.first;
