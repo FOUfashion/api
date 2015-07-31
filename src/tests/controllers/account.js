@@ -28,6 +28,7 @@ lab.experiment('AccountCtrl', function() {
       const result = response.result;
 
       expect(response.statusCode).to.equal(200);
+      expect(result.profile.email).to.equal(data.fp.account.profile.email);
       expect(result.username).to.equal(data.fp.account.username);
       expect(result.password).to.be.undefined();
 
