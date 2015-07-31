@@ -3,7 +3,8 @@ import Post from '../models/post';
 class PostCtrl {
 
   async get(request, reply) {
-    reply(await Post.get(request.params.id).getJoin().run());
+    const post = await Post.get(request.params.id).getJoin().run();
+    reply(post);
   }
 
   async create(request, reply) {
@@ -28,7 +29,7 @@ class PostCtrl {
   async delete(request, reply) {
     const post = await Post.get(request.params.id).run();
     await post.deleteAll();
-    reply().status(204);
+    reply().code(204);
   }
 
 }

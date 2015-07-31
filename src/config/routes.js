@@ -130,11 +130,6 @@ const routes = [
       auth: {
         scope: [scopes.FIRST_PARTY]
       },
-      plugins: {
-        'hapi-auth-ownership': {
-          ownershipRule: 'account'
-        }
-      },
       validate: {
         payload: {
           password: Joi.string().min(6).max(32).trim()
@@ -148,11 +143,6 @@ const routes = [
     config: {
       auth: {
         scope: [scopes.FIRST_PARTY]
-      },
-      plugins: {
-        'hapi-auth-ownership': {
-          ownershipRule: 'account'
-        }
       }
     }
   },
@@ -172,7 +162,7 @@ const routes = [
     handler: profile.update,
     config: {
       plugins: {
-        'hapi-auth-ownership': {
+        hapiAuthOwnership: {
           ownershipRule: 'profile'
         }
       },
@@ -192,18 +182,17 @@ const routes = [
     handler: comment.get
   }, {
     method: 'POST',
-    path: '/comment',
+    path: '/post/{id}/comment',
     handler: comment.create,
     config: {
       plugins: {
-        'hapi-auth-ownership': {
+        hapiAuthOwnership: {
           ownershipRule: 'post'
         }
       },
       validate: {
         payload: {
-          body: Joi.string().required().min(1).max(32).trim(),
-          postId: Joi.string().guid().required()
+          body: Joi.string().required().trim()
         }
       }
     }
@@ -213,13 +202,13 @@ const routes = [
     handler: comment.update,
     config: {
       plugins: {
-        'hapi-auth-ownership': {
+        hapiAuthOwnership: {
           ownershipRule: 'comment'
         }
       },
       validate: {
         payload: {
-          body: Joi.string().min(1).max(32).trim()
+          body: Joi.string().trim()
         }
       }
     }
@@ -229,7 +218,7 @@ const routes = [
     handler: comment.delete,
     config: {
       plugins: {
-        'hapi-auth-ownership': {
+        hapiAuthOwnership: {
           ownershipRule: 'comment'
         }
       }
@@ -248,7 +237,7 @@ const routes = [
     config: {
       validate: {
         payload: {
-          body: Joi.string().required().min(1).max(32).trim()
+          body: Joi.string().required().trim()
         }
       }
     }
@@ -258,13 +247,13 @@ const routes = [
     handler: post.update,
     config: {
       plugins: {
-        'hapi-auth-ownership': {
+        hapiAuthOwnership: {
           ownershipRule: 'post'
         }
       },
       validate: {
         payload: {
-          body: Joi.string().min(1).max(32).trim()
+          body: Joi.string().trim()
         }
       }
     }
@@ -274,7 +263,7 @@ const routes = [
     handler: post.delete,
     config: {
       plugins: {
-        'hapi-auth-ownership': {
+        hapiAuthOwnership: {
           ownershipRule: 'post'
         }
       }

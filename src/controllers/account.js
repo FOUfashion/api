@@ -84,7 +84,7 @@ class AccountCtrl {
     }
 
     await account.deleteAll();
-    reply().status(204);
+    reply().code(204);
   }
 
 }

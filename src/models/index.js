@@ -47,8 +47,10 @@ Code.belongsTo(Client, 'client', 'clientId', 'id');
 
 // Comment
 Comment.ensureIndex('postId');
+Comment.ensureIndex('accountId');
 
 Comment.belongsTo(Post, 'post', 'postId', 'id');
+Comment.belongsTo(Account, 'account', 'accountId', 'id');
 
 // Post
 Post.ensureIndex('accountId');
